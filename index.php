@@ -33,7 +33,7 @@
             $queryGP = $bdd->prepare($getPhoto);
             $queryGP->execute();
             $resultGP = $queryGP->fetch();
-            echo "<img src='".$resultGP[0]."' width = '350px', height='350px'><br><p><a href='http://localhost/SLAM/AP3/AP3/produit?id=".$res['pr_id']."'>".$res['pr_nom']."</a> ".$res['pr_coutHT']."€ HT</p> ";
+            echo "<img src='".$resultGP[0]."' width = '350px', height='350px'><br><p><a href='http://localhost/SLAM/AP3/AP3/produit.php?id=".$res['pr_id']."'>".$res['pr_nom']."</a> ".$res['pr_coutHT']."€ HT</p> ";
         }
         
 
