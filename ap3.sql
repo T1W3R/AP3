@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 13 sep. 2022 à 15:56
+-- Généré le : mar. 13 sep. 2022 à 16:23
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.24
 
@@ -131,10 +131,10 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`ph_id`, `ph_chemin`, `fk_pr`) VALUES
-(1, 'images/1475188027-ramses.jpg', 1),
-(2, 'images/affrontemonregard.jpg', 1),
-(3, 'images/damn.jpg', 2),
-(4, 'images/doigdrip.jpg', 2);
+(1, 'images/nike-revolution-6-nn2.jpg', 1),
+(2, 'images/nike-revolution-6-nn.jpg', 1),
+(3, 'images/nike_251136_BV6877_010_20210211T143858_01.jpg', 2),
+(4, 'images/nike_251136_BV6877_010_20210211T143900_02.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -170,8 +170,8 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`pr_id`, `pr_nom`, `pr_reference`, `pr_NomFournisseur`, `pr_rayon`, `pr_coutHT`, `pr_description`, `pr_stockInternet`, `pr_stockMagasin`) VALUES
-(1, 'Siphano + Gordon', 'FOUSPO000001', 'Fournisseur', 'Sport', 12.54, 'siphano et Gordon Ramses', 14, 12),
-(2, 'Chien et doigdrip', 'DOISPO000002', 'Doigby', 'Sport', 75.56, 'Chien + doigdrip', 12, 14);
+(1, 'Chaussures nike', 'NIKSPO000001', 'Nike', 'Sport', 12.54, 'Chaussures nike sport', 14, 12),
+(2, 'Jogging nike', 'NIKSPO000002', 'Nike', 'Sport', 75.56, 'Jogging nike sport', 12, 14);
 
 -- --------------------------------------------------------
 
