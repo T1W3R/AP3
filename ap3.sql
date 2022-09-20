@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 20 sep. 2022 à 15:25
+-- Généré le : mar. 20 sep. 2022 à 15:53
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.24
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `a_en_stock` (
+  `pr_stock` int(11) NOT NULL,
   `fk_pr` int(11) NOT NULL,
   `fk_ma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -106,6 +107,13 @@ CREATE TABLE `fournisseur` (
   `fo_nom` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `fournisseur`
+--
+
+INSERT INTO `fournisseur` (`fo_id`, `fo_nom`) VALUES
+(1, 'Nike');
+
 -- --------------------------------------------------------
 
 --
@@ -148,6 +156,14 @@ CREATE TABLE `magasin` (
   `ma_id` int(11) NOT NULL,
   `ma_lieu` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `magasin`
+--
+
+INSERT INTO `magasin` (`ma_id`, `ma_lieu`) VALUES
+(1, 'Paris'),
+(2, 'Tours');
 
 -- --------------------------------------------------------
 
@@ -196,7 +212,6 @@ CREATE TABLE `produit` (
   `pr_coutHT` float NOT NULL,
   `pr_description` text NOT NULL,
   `pr_stockInternet` int(11) NOT NULL,
-  `pr_stockMagasin` int(11) NOT NULL,
   `fk_fournisseur` int(11) NOT NULL,
   `fk_rayon` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -205,9 +220,9 @@ CREATE TABLE `produit` (
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`pr_id`, `pr_nom`, `pr_reference`, `pr_NomFournisseur`, `pr_coutHT`, `pr_description`, `pr_stockInternet`, `pr_stockMagasin`, `fk_fournisseur`, `fk_rayon`) VALUES
-(1, 'Chaussures nike', 'NIKSPO000001', 'Nike', 12.54, 'Chaussures nike sport', 14, 12, 0, 1),
-(2, 'Jogging nike', 'NIKSPO000002', 'Nike', 75.56, 'Jogging nike sport', 12, 14, 0, 1);
+INSERT INTO `produit` (`pr_id`, `pr_nom`, `pr_reference`, `pr_NomFournisseur`, `pr_coutHT`, `pr_description`, `pr_stockInternet`, `fk_fournisseur`, `fk_rayon`) VALUES
+(1, 'Chaussures nike', 'NIKSPO000001', 'Nike', 12.54, 'Chaussures nike sport', 14, 1, 1),
+(2, 'Jogging nike', 'NIKSPO000002', 'Nike', 75.56, 'Jogging nike sport', 12, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -344,7 +359,7 @@ ALTER TABLE `enfant`
 -- AUTO_INCREMENT pour la table `fournisseur`
 --
 ALTER TABLE `fournisseur`
-  MODIFY `fo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `lieustockage`
@@ -353,10 +368,22 @@ ALTER TABLE `lieustockage`
   MODIFY `ls_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT pour la table `magasin`
+--
+ALTER TABLE `magasin`
+  MODIFY `ma_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT pour la table `photos`
 --
 ALTER TABLE `photos`
   MODIFY `ph_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `produit`
+--
+ALTER TABLE `produit`
+  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `rayon`
@@ -372,8 +399,8 @@ ALTER TABLE `rayon`
 -- Contraintes pour la table `a_en_stock`
 --
 ALTER TABLE `a_en_stock`
-  ADD CONSTRAINT `a_en_stock_ibfk_1` FOREIGN KEY (`fk_pr`) REFERENCES `produit` (`pr_id`),
-  ADD CONSTRAINT `a_en_stock_ibfk_2` FOREIGN KEY (`fk_ma`) REFERENCES `magasin` (`ma_id`);
+  ADD CONSTRAINT `a_en_stock_ibfk_2` FOREIGN KEY (`fk_ma`) REFERENCES `magasin` (`ma_id`),
+  ADD CONSTRAINT `a_en_stock_ibfk_3` FOREIGN KEY (`fk_pr`) REFERENCES `produit` (`pr_id`);
 
 --
 -- Contraintes pour la table `commande`
