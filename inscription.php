@@ -30,12 +30,6 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="inputpseudo" class="col-sm-2 col-form-label">Pseudo :</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputPseudo" placeholder="Pseudo" name="pseudo" required>
-                    </div>
-                </div>
-                <div class="mb-3 row">
                     <label for="inputadress" class="col-sm-2 col-form-label">Adresse :</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputAdress" placeholder="623 rue du boulevard Paris" name="adress" required>

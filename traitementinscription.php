@@ -18,8 +18,8 @@
         } else {
             $mdp = $_POST['mdp'];
             $hash = hash("sha512", $mdp);
-            InsertUser($_POST['nom'], $_POST['prenom'], $_POST['mail'], $hash, $_POST['pseudo'], $_POST['adress']);
-            header('Location: http://localhost/Projet/connexion.php');
+            InsertUser($_POST['nom'], $_POST['prenom'], $_POST['mail'], $hash, $_POST['adress']);
+            header('Location: http://localhost/connexion.php');
             exit();
         }
 
@@ -27,13 +27,12 @@
 
     function InsertUser($nom, $prenom, $mail, $hash, $pseudo, $adress){
 
-        $insert = "INSERT INTO utilisateur(ut_nom, ut_prenom, ut_pseudo, ut_mdp, ut_adresse, ut_mail) VALUES(:nom, :prenom, :pseudo, :hash, :adress, :mail);";
+        $insert = "INSERT INTO client(cl_nom, cl_prenom, cl_mdp, cl_adresse, cl_email) VALUES(:nom, :prenom,  :hash, :adress, :mail);";
 
         $bdd = construct_();
         $query = $bdd->prepare($insert);
         $query->execute(array(":nom" => $nom,
                               ":prenom" => $prenom,
-                              ":pseudo" => $pseudo,
                               ":hash" => $hash,
                               ":adress" => $adress,
                               ":mail" => $mail));
