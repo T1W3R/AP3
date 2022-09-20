@@ -18,6 +18,9 @@ function getConnexion()
 }
 ?>
 
+<h2>Actualité</h2>
+
+
 <div class="produits">
 
     <?php
