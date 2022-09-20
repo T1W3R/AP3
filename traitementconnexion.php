@@ -13,14 +13,14 @@ function construct_()
     }
 }
 
-function VerifUser($hash, $pseudo)
+function VerifUser($hash, $mail)
 {
 
-    $verif = "SELECT ut_pseudo FROM utilisateur WHERE ut_pseudo = :pseudo AND ut_mdp = :mdp";
+    $verif = "SELECT cl_code FROM client WHERE cl_email = :mail AND cl_mdp = :mdp";
     $bdd = construct_();
     $query = $bdd->prepare($verif);
     $query->execute(array(
-        ":pseudo" => $pseudo,
+        ":mail" => $mail,
         ":mdp" => $hash
     ));
     $res = $query->fetch();
@@ -28,16 +28,16 @@ function VerifUser($hash, $pseudo)
     return $res;
 }
 
-if (!empty($_POST['pseudo']) && !empty($_POST['mdp'])) {
+if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
 
-    $pseudo = $_POST['pseudo'];
+    $mail = $_POST['mail'];
     $mdp = $_POST['mdp'];
     $hash = hash("sha512", $mdp);
 
     $res = VerifUser($hash, $pseudo);
 
-    if (!empty($res['ut_pseudo'])) {
-        $_SESSION["pseudo"] = $pseudo;
+    if (!empty($res['cl_code'])) {
+        $_SESSION["login"] = $res['cl_code'];
         var_dump('oui');
         //header('Location: http://localhost/Projet');
         //exit();
