@@ -38,7 +38,7 @@
                     $prixTTC = number_format((float)$prixTTC, 2, '.', '');
 
                     //Affichage produit 
-                    echo "<p>".$result["pr_nom"]."<br>".$result["pr_description"]."<br>".$result['pr_coutHT']." € HT<br>+20% TVA<br>".$prixTTC." € TTC</p>";
+                    echo "<p>".$result["pr_nom"]."<br>".$result["pr_description"]."<br>".$result['pr_coutHT']." € HT<br>+20% TVA<br>".$prixTTC."€ TTC</p>";
                     foreach($resultGP as $resGP){
                         echo "<img src='".$resGP[0]."' width = '350px', height='350px'>";
                     }
