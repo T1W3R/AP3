@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<html>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    include "header_unconnected.php";
+} else {
+    include "header_connected.php";
+};
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>AP3</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-</head>
+function getConnexion()
+{
+    $dsn = 'mysql:dbname=ap3;host=127.0.0.1:3308';
 
-<body>
-    <?php
-    if (session_status() === PHP_SESSION_NONE) {
-        include "header_unconnected.php";
-    } else {
-        include "header_connected.php";
-    };
-
-    function getConnexion()
-    {
-        $dsn = 'mysql:dbname=ap3;host=127.0.0.1:3308';
-
-        try {
-            $bdd = new PDO($dsn, "root", "");
-            return $bdd;
-        } catch (PDOExeption $e) {
-            die('DB Error: ' . $e->getMessage());
-        }
+    try {
+        $bdd = new PDO($dsn, "root", "");
+        return $bdd;
+    } catch (PDOExeption $e) {
+        die('DB Error: ' . $e->getMessage());
     }
+}
+?>
+
+<div class="produits">
+
+    <?php
 
     $sql = "SELECT pr_id, pr_nom, pr_coutHT FROM `produit`";
     $bdd = getConnexion();
@@ -40,13 +33,15 @@
         $queryGP = $bdd->prepare($getPhoto);
         $queryGP->execute();
         $resultGP = $queryGP->fetch();
-        echo "<img src='" . $resultGP[0] . "' width = '350px', height='350px'><br><p><a href='http://localhost/SLAM/AP3/AP3/produit.php?id=" . $res['pr_id'] . "'>" . $res['pr_nom'] . "</a> " . $res['pr_coutHT'] . "€ HT</p> ";
+        echo '<div class="produitIndividuel"><img id="imgproduit" src="' . $resultGP[0] . '" width = 450px, height=450px><br><a href="http://localhost/SLAM/AP3/AP3/produit.php?id=' . $res['pr_id'] . '">' . $res['pr_nom'] . "</a> <p>" . $res['pr_coutHT'] . '€ HT</p></div> ';
     }
 
 
 
 
     ?>
+
+</div>
 
 </body>
 
