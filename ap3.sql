@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 13 sep. 2022 à 16:23
+-- Généré le : mar. 20 sep. 2022 à 15:25
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.24
 
@@ -24,18 +24,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `a_en_stock`
+--
+
+CREATE TABLE `a_en_stock` (
+  `fk_pr` int(11) NOT NULL,
+  `fk_ma` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `client`
 --
 
 CREATE TABLE `client` (
   `cl_id` int(11) NOT NULL,
   `cl_code` varchar(11) NOT NULL,
-  `cl_nomPrenom` varchar(60) NOT NULL,
+  `cl_nom` varchar(60) NOT NULL,
+  `cl_prenom` varchar(45) NOT NULL,
+  `cl_mdp` varchar(150) NOT NULL,
   `cl_adresse` varchar(128) NOT NULL,
   `cl_email` varchar(45) NOT NULL,
   `cl_telephone` varchar(15) NOT NULL,
-  `cl_dateNaissance` date NOT NULL,
-  `cl_nbEnfant` int(2) NOT NULL
+  `cl_dateNaissance` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commande`
+--
+
+CREATE TABLE `commande` (
+  `co_id` int(11) NOT NULL,
+  `co_date` date NOT NULL,
+  `co_prixTotal` float NOT NULL,
+  `co_quantite` int(11) NOT NULL,
+  `fk_cl` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -72,15 +98,12 @@ INSERT INTO `est_stocke` (`fk_pr`, `fk_ls`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `historique`
+-- Structure de la table `fournisseur`
 --
 
-CREATE TABLE `historique` (
-  `hi_id` int(11) NOT NULL,
-  `hi_date` date NOT NULL,
-  `hi_prixTotal` float NOT NULL,
-  `hi_quantite` int(11) NOT NULL,
-  `fk_cl` int(11) NOT NULL
+CREATE TABLE `fournisseur` (
+  `fo_id` int(11) NOT NULL,
+  `fo_nom` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -110,8 +133,20 @@ INSERT INTO `lieustockage` (`ls_id`, `ls_libelle`) VALUES
 --
 
 CREATE TABLE `lie_a` (
+  `pr_quantite` int(11) NOT NULL,
   `fk_pr` int(11) NOT NULL,
-  `fk_hi` int(11) NOT NULL
+  `fk_co` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `magasin`
+--
+
+CREATE TABLE `magasin` (
+  `ma_id` int(11) NOT NULL,
+  `ma_lieu` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -158,41 +193,64 @@ CREATE TABLE `produit` (
   `pr_nom` varchar(100) NOT NULL,
   `pr_reference` varchar(18) NOT NULL,
   `pr_NomFournisseur` varchar(45) NOT NULL,
-  `pr_rayon` varchar(45) NOT NULL,
   `pr_coutHT` float NOT NULL,
   `pr_description` text NOT NULL,
   `pr_stockInternet` int(11) NOT NULL,
-  `pr_stockMagasin` int(11) NOT NULL
+  `pr_stockMagasin` int(11) NOT NULL,
+  `fk_fournisseur` int(11) NOT NULL,
+  `fk_rayon` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`pr_id`, `pr_nom`, `pr_reference`, `pr_NomFournisseur`, `pr_rayon`, `pr_coutHT`, `pr_description`, `pr_stockInternet`, `pr_stockMagasin`) VALUES
-(1, 'Chaussures nike', 'NIKSPO000001', 'Nike', 'Sport', 12.54, 'Chaussures nike sport', 14, 12),
-(2, 'Jogging nike', 'NIKSPO000002', 'Nike', 'Sport', 75.56, 'Jogging nike sport', 12, 14);
+INSERT INTO `produit` (`pr_id`, `pr_nom`, `pr_reference`, `pr_NomFournisseur`, `pr_coutHT`, `pr_description`, `pr_stockInternet`, `pr_stockMagasin`, `fk_fournisseur`, `fk_rayon`) VALUES
+(1, 'Chaussures nike', 'NIKSPO000001', 'Nike', 12.54, 'Chaussures nike sport', 14, 12, 0, 1),
+(2, 'Jogging nike', 'NIKSPO000002', 'Nike', 75.56, 'Jogging nike sport', 12, 14, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sports`
+-- Structure de la table `rayon`
 --
 
-CREATE TABLE `sports` (
-  `sp_id` int(11) NOT NULL,
-  `sp_libelle` varchar(45) NOT NULL
+CREATE TABLE `rayon` (
+  `ra_id` int(11) NOT NULL,
+  `ra_libelle` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `rayon`
+--
+
+INSERT INTO `rayon` (`ra_id`, `ra_libelle`) VALUES
+(1, 'Football'),
+(2, 'Volley');
 
 --
 -- Index pour les tables déchargées
 --
 
 --
+-- Index pour la table `a_en_stock`
+--
+ALTER TABLE `a_en_stock`
+  ADD PRIMARY KEY (`fk_pr`,`fk_ma`),
+  ADD KEY `fk_ma` (`fk_ma`);
+
+--
 -- Index pour la table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`cl_id`);
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`co_id`),
+  ADD KEY `fk_cl` (`fk_cl`);
 
 --
 -- Index pour la table `enfant`
@@ -209,11 +267,10 @@ ALTER TABLE `est_stocke`
   ADD KEY `fk_ls` (`fk_ls`);
 
 --
--- Index pour la table `historique`
+-- Index pour la table `fournisseur`
 --
-ALTER TABLE `historique`
-  ADD PRIMARY KEY (`hi_id`),
-  ADD KEY `fk_cl` (`fk_cl`);
+ALTER TABLE `fournisseur`
+  ADD PRIMARY KEY (`fo_id`);
 
 --
 -- Index pour la table `lieustockage`
@@ -225,8 +282,14 @@ ALTER TABLE `lieustockage`
 -- Index pour la table `lie_a`
 --
 ALTER TABLE `lie_a`
-  ADD PRIMARY KEY (`fk_pr`,`fk_hi`),
-  ADD KEY `fk_hi` (`fk_hi`);
+  ADD PRIMARY KEY (`fk_pr`,`fk_co`),
+  ADD KEY `fk_hi` (`fk_co`);
+
+--
+-- Index pour la table `magasin`
+--
+ALTER TABLE `magasin`
+  ADD PRIMARY KEY (`ma_id`);
 
 --
 -- Index pour la table `photos`
@@ -246,13 +309,14 @@ ALTER TABLE `pratique`
 -- Index pour la table `produit`
 --
 ALTER TABLE `produit`
-  ADD PRIMARY KEY (`pr_id`);
+  ADD PRIMARY KEY (`pr_id`),
+  ADD KEY `fk_rayon` (`fk_rayon`);
 
 --
--- Index pour la table `sports`
+-- Index pour la table `rayon`
 --
-ALTER TABLE `sports`
-  ADD PRIMARY KEY (`sp_id`);
+ALTER TABLE `rayon`
+  ADD PRIMARY KEY (`ra_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -265,16 +329,22 @@ ALTER TABLE `client`
   MODIFY `cl_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `enfant`
 --
 ALTER TABLE `enfant`
   MODIFY `en_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `historique`
+-- AUTO_INCREMENT pour la table `fournisseur`
 --
-ALTER TABLE `historique`
-  MODIFY `hi_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `fournisseur`
+  MODIFY `fo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `lieustockage`
@@ -289,14 +359,27 @@ ALTER TABLE `photos`
   MODIFY `ph_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `sports`
+-- AUTO_INCREMENT pour la table `rayon`
 --
-ALTER TABLE `sports`
-  MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `rayon`
+  MODIFY `ra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `a_en_stock`
+--
+ALTER TABLE `a_en_stock`
+  ADD CONSTRAINT `a_en_stock_ibfk_1` FOREIGN KEY (`fk_pr`) REFERENCES `produit` (`pr_id`),
+  ADD CONSTRAINT `a_en_stock_ibfk_2` FOREIGN KEY (`fk_ma`) REFERENCES `magasin` (`ma_id`);
+
+--
+-- Contraintes pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`fk_cl`) REFERENCES `client` (`cl_id`);
 
 --
 -- Contraintes pour la table `enfant`
@@ -312,16 +395,10 @@ ALTER TABLE `est_stocke`
   ADD CONSTRAINT `est_stocke_ibfk_2` FOREIGN KEY (`fk_pr`) REFERENCES `produit` (`pr_id`);
 
 --
--- Contraintes pour la table `historique`
---
-ALTER TABLE `historique`
-  ADD CONSTRAINT `historique_ibfk_1` FOREIGN KEY (`fk_cl`) REFERENCES `client` (`cl_id`);
-
---
 -- Contraintes pour la table `lie_a`
 --
 ALTER TABLE `lie_a`
-  ADD CONSTRAINT `lie_a_ibfk_1` FOREIGN KEY (`fk_hi`) REFERENCES `historique` (`hi_id`),
+  ADD CONSTRAINT `lie_a_ibfk_1` FOREIGN KEY (`fk_co`) REFERENCES `commande` (`co_id`),
   ADD CONSTRAINT `lie_a_ibfk_2` FOREIGN KEY (`fk_pr`) REFERENCES `produit` (`pr_id`);
 
 --
@@ -334,8 +411,14 @@ ALTER TABLE `photos`
 -- Contraintes pour la table `pratique`
 --
 ALTER TABLE `pratique`
-  ADD CONSTRAINT `pratique_ibfk_2` FOREIGN KEY (`fk_sp`) REFERENCES `sports` (`sp_id`),
+  ADD CONSTRAINT `pratique_ibfk_2` FOREIGN KEY (`fk_sp`) REFERENCES `rayon` (`ra_id`),
   ADD CONSTRAINT `pratique_ibfk_3` FOREIGN KEY (`fk_cl`) REFERENCES `client` (`cl_id`);
+
+--
+-- Contraintes pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`fk_rayon`) REFERENCES `rayon` (`ra_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
