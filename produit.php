@@ -19,7 +19,7 @@ if (isset($_GET["id"])) {
         }
     }
     //Avoir les infos de l'article 
-    $sql = "SELECT pr_id, pr_nom, pr_coutHT, pr_description FROM `produit` WHERE pr_id=" . $_GET['id'];
+    $sql = "SELECT pr_id, pr_nom, pr_coutHT, pr_description, pr_stockInternet FROM `produit` WHERE pr_id=" . $_GET['id'];
     $bdd = getConnexion();
     $query = $bdd->prepare($sql);
     $query->execute();
@@ -31,12 +31,25 @@ if (isset($_GET["id"])) {
     $queryGP->execute();
     $resultGP = $queryGP->fetchAll();
 
+    //Avoir stock magasin
+    $getStockMagasin = "SELECT pr_stock, ma_lieu FROM a_en_stock JOIN magasin ON fk_ma = ma_id WHERE fk_pr = ".$_GET['id']; 
+    $queryGST = $bdd->prepare($getStockMagasin);
+    $queryGST->execute();
+    $resultGST = $queryGST->fetchAll();
+    $DispoMagasin = "";
+    if($resultGST != "none"){
+        foreach($resultGST as $resGST){
+            $DispoMagasin .= "<br>".$resGST["ma_lieu"].": ".$resGST["pr_stock"]." disponibilités."; 
+        }
+    }
+
     //Calcul prix total
     $prixTTC = $result["pr_coutHT"] + 0.20 * $result["pr_coutHT"];
     $prixTTC = number_format((float)$prixTTC, 2, '.', '');
 
     //Affichage produit 
-    echo "<p>" . $result["pr_nom"] . "<br>" . $result["pr_description"] . "<br>" . $result['pr_coutHT'] . " € HT<br>+20% TVA<br>" . $prixTTC . "€ TTC</p>";
+    echo "<p>" . $result["pr_nom"] . "<br>" . $result["pr_description"] . "<br>" . $result['pr_coutHT'] . " € HT<br>+20% TVA<br>" . $prixTTC . "€ TTC ".$DispoMagasin." <br> Stock internet: ".$result["pr_stockInternet"]." disponibilités.</p>";
+    
     foreach ($resultGP as $resGP) {
         echo "<img src='" . $resGP[0] . "' width = '350px', height='350px'>";
     }
