@@ -1,8 +1,8 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    include "header_unconnected.php";
-} else {
+if (!isset($_SESSION)) {
     include "header_connected.php";
+} else {
+    include "header_unconnected.php";
 };
 
 function getConnexion()
@@ -36,7 +36,7 @@ function getConnexion()
         $queryGP = $bdd->prepare($getPhoto);
         $queryGP->execute();
         $resultGP = $queryGP->fetch();
-        echo '<div class="produitIndividuel"><img id="imgproduit" src="' . $resultGP[0] . '" width = 450px, height=450px><br><a href="http://localhost/SLAM/AP3/AP3/produit.php?id=' . $res['pr_id'] . '">' . $res['pr_nom'] . "</a> <p>" . $res['pr_coutHT'] . '€ HT</p></div> ';
+        echo '<a href="http://localhost/SLAM/AP3/AP3/produit.php?id=' . $res['pr_id'] . '"> <div class="produitIndividuel"><img id="imgproduit" src="' . $resultGP[0] . '" width = 450px, height=450px><br>' . $res['pr_nom'] . " <p>" . $res['pr_coutHT'] . '€ HT</p></div> </a>';
     }
 
 

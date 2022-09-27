@@ -18,12 +18,16 @@
         <div class="logo"><a href="index.php"><img src="images/logo.png" alt="logo.png" height=20px></a></div>
         <div class="magasin">
             <div>
-                <img src="images/perso.png" alt="perso.png" height=13px>
-                <a>Mon Compte</a>
+                <a>
+                    <img src="images/perso.png" alt="perso.png" height=13px>
+                    Mon Compte
+                </a>
             </div>
             <div>
-                <img src="images/panier.png" alt="panier.png" height=13px>
-                <a>Mon Panier</a>
+                <a>
+                    <img src="images/panier.png" alt="panier.png" height=13px style="margin-left: 15px;">
+                    Mon Panier
+                </a>
             </div>
         </div>
     </header>

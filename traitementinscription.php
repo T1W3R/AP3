@@ -20,7 +20,7 @@ if (!empty($_POST['telephone']) && !empty($_POST['prenom']) && !empty($_POST['no
         $mdp = $_POST['mdp'];
         $hash = hash("sha512", $mdp);
         InsertUser($_POST['nom'], $_POST['prenom'], $_POST['mail'], $hash, $_POST['adress'], $_POST['telephone'], $_POST['birthdate']);
-        header('Location: http://localhost/connexion.php');
+        header('Location: http://localhost/SLAM/AP3/ap3/connexion.php');
         exit();
     }
 }

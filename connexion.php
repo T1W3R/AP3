@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <center>
             <img src="images/tiny_logo.png" alt="tiny_logo" height=50vw>
             <h1>Veuillez vous connectez :</h1>
-            <div style="display : flex; justify-content: center;">
+            <div style="display : flex;justify-content: center;align-items: center;">
                 <p>Si vous ne possedez pas de compte, cliquez sur </p>
                 <p style="color: #B19D7F;">i</p> <a href="inscription.php"> S'inscrire</a>
             </div>

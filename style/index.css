@@ -33,6 +33,7 @@ button {
     padding-left: 15px;
     padding-right: 15px;
     border: none;
+    padding-bottom: 15px;
 }
 
 .produits {
@@ -69,4 +70,17 @@ h2 {
     margin-bottom: 20px;
     font-size: 25px;
 
+}
+
+.form-control {
+    height: 40px;
+    width: 1200px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+.magasin {
+    display: flex;
 }

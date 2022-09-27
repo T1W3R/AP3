@@ -24,7 +24,7 @@ function VerifUser($hash, $mail)
         ":mdp" => $hash
     ));
     $res = $query->fetch();
-
+    var_dump($res);
     return $res;
 }
 
@@ -34,19 +34,17 @@ if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
     $mdp = $_POST['mdp'];
     $hash = hash("sha512", $mdp);
 
-    $res = VerifUser($hash, $pseudo);
+    $res = VerifUser($hash, $mail);
 
     if (!empty($res['cl_code'])) {
         $_SESSION["login"] = $res['cl_code'];
-        var_dump('oui');
-        //header('Location: http://localhost/Projet');
-        //exit();
+        header('Location: http://localhost/SLAM/AP3/ap3/index.php');
+        exit();
     } else {
-        var_dump('non');
-        //header('Location: http://localhost/Projet/connexion.php');
-        //exit();
-        //$message = "probleme de connection";
-        //echo'<script type="text/javascript"> alert('.$message.')</script>';
+        header('Location: http://localhost/SLAM/AP3/ap3/connexion.php');
+        exit();
+        $message = "probleme de connection";
+        echo '<script type="text/javascript"> alert(' . $message . ')</script>';
     }
 } else {
     header('Location: http://localhost/Projet/connexion.php');

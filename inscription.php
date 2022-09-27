@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <center>
             <img src="images/tiny_logo.png" alt="tiny_logo" height=50vw>
             <h1>Inscription:</h1>
-            <div style="display : flex; justify-content: center;">
+            <div style="display : flex;justify-content: center;align-items: center;">
                 <p>Vous êtes nouveaux sur notre site, veuillez renseignez ces données.</p>
                 <p style="color: #B19D7F;">i</p><a href="connexion.php"> Retour</a>
             </div>
