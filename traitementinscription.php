@@ -8,10 +8,11 @@ function construct_()
     try {
         $bdd = new PDO($dsn, "root", "");
         return $bdd;
-    } catch (PDOExeption $e) {
+    } catch (PDOException $e) {
         die('DB Error: ' . $e->getMessage());
     }
 }
+
 
 if (!empty($_POST['telephone']) && !empty($_POST['prenom']) && !empty($_POST['nom']) && !empty($_POST['mdp']) && !empty($_POST['cmdp']) && !empty($_POST['adress']) && !empty($_POST['mail']) && !empty($_POST['birthdate'])) {
     if ($_POST['mdp'] != $_POST['cmdp']) {

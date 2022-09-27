@@ -14,7 +14,7 @@ if (isset($_GET["id"])) {
         try {
             $bdd = new PDO($dsn, "root", "");
             return $bdd;
-        } catch (PDOExeption $e) {
+        } catch (PDOException $e) {
             die('DB Error: ' . $e->getMessage());
         }
     }
@@ -32,14 +32,14 @@ if (isset($_GET["id"])) {
     $resultGP = $queryGP->fetchAll();
 
     //Avoir stock magasin
-    $getStockMagasin = "SELECT pr_stock, ma_lieu FROM a_en_stock JOIN magasin ON fk_ma = ma_id WHERE fk_pr = ".$_GET['id']; 
+    $getStockMagasin = "SELECT pr_stock, ma_lieu FROM a_en_stock JOIN magasin ON fk_ma = ma_id WHERE fk_pr = " . $_GET['id'];
     $queryGST = $bdd->prepare($getStockMagasin);
     $queryGST->execute();
     $resultGST = $queryGST->fetchAll();
     $DispoMagasin = "";
-    if($resultGST != "none"){
-        foreach($resultGST as $resGST){
-            $DispoMagasin .= "<br>".$resGST["ma_lieu"].": ".$resGST["pr_stock"]." disponibilités."; 
+    if ($resultGST != "none") {
+        foreach ($resultGST as $resGST) {
+            $DispoMagasin .= "<br>" . $resGST["ma_lieu"] . ": " . $resGST["pr_stock"] . " disponibilités.";
         }
     }
 
@@ -48,8 +48,8 @@ if (isset($_GET["id"])) {
     $prixTTC = number_format((float)$prixTTC, 2, '.', '');
 
     //Affichage produit 
-    echo "<p>" . $result["pr_nom"] . "<br>" . $result["pr_description"] . "<br>" . $result['pr_coutHT'] . " € HT<br>+20% TVA<br>" . $prixTTC . "€ TTC ".$DispoMagasin." <br> Stock internet: ".$result["pr_stockInternet"]." disponibilités.</p>";
-    
+    echo "<p>" . $result["pr_nom"] . "<br>" . $result["pr_description"] . "<br>" . $result['pr_coutHT'] . " € HT<br>+20% TVA<br>" . $prixTTC . "€ TTC " . $DispoMagasin . " <br> Stock internet: " . $result["pr_stockInternet"] . " disponibilités.</p>";
+
     foreach ($resultGP as $resGP) {
         echo "<img src='" . $resGP[0] . "' width = '350px', height='350px'>";
     }

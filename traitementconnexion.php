@@ -8,7 +8,7 @@ function construct_()
     try {
         $bdd = new PDO($dsn, "root", "");
         return $bdd;
-    } catch (PDOExeption $e) {
+    } catch (PDOException $e) {
         die('DB Error: ' . $e->getMessage());
     }
 }

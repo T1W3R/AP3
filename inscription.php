@@ -1,8 +1,10 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    include "header_unconnected.php";
-} else {
+session_start();
+
+if (isset($_SESSION["login"])) {
     include "header_connected.php";
+} else {
+    include "header_unconnected.php";
 };
 ?>
 
