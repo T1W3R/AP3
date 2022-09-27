@@ -18,7 +18,9 @@
         </div>
         <div class="logo"><a href="index.php"><img src="images/logo.png" alt="logo.png" height=20px></a></div>
         <div class="magasin">
-            <img src="images/perso.png" alt="perso.png" height=13px>
-            <a href="connexion.php" id="liens">Se Connecter</a>
+            <a href="connexion.php" id="liens">
+                <img src="images/perso.png" alt="perso.png" height=13px>
+                Se Connecter
+            </a>
         </div>
     </header>

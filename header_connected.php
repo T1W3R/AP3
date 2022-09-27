@@ -18,15 +18,15 @@
         <div class="logo"><a href="index.php"><img src="images/logo.png" alt="logo.png" height=20px></a></div>
         <div class="magasin">
             <div>
-                <a>
+                <a href="monCompte.php" id="liens">
                     <img src="images/perso.png" alt="perso.png" height=13px>
                     Mon Compte
                 </a>
             </div>
             <div>
-                <a>
+                <a href="monPanier.php" id="liens">
                     <img src="images/panier.png" alt="panier.png" height=13px style="margin-left: 15px;">
-                    Mon Panier
+                    Mon Panier ssss
                 </a>
             </div>
         </div>
