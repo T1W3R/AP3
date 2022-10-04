@@ -66,6 +66,8 @@ foreach ($res as $r) {
             <div>' . $dN . '</div>
         </div>
     </div>
+
+    <button href="deconnexion.php" class="btn btn-primary mb-3" style="background-color: #B19D7F; border-color: aliceblue; color: aliceblue;">Se déconnecter</button>
 </center>
 ';
 };
