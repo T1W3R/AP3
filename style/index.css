@@ -101,3 +101,10 @@ a.boutton {
     border-color: aliceblue;
     color: aliceblue;
 }
+
+.big-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-around;
+}

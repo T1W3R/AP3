@@ -48,11 +48,44 @@ if (isset($_GET["id"])) {
     $prixTTC = number_format((float)$prixTTC, 2, '.', '');
 
     //Affichage produit 
-    echo "<p>" . $result["pr_nom"] . "<br>" . $result["pr_description"] . "<br>" . $result['pr_coutHT'] . " € HT<br>+20% TVA<br>" . $prixTTC . "€ TTC " . $DispoMagasin . " <br> Stock internet: " . $result["pr_stockInternet"] . " disponibilités.</p>";
+    echo "<div class='big-container'><div class='container'>";
 
     foreach ($resultGP as $resGP) {
-        echo "<img src='" . $resGP[0] . "' width = '350px', height='350px'>";
+        $image = 'changerImage("' . $resGP[0] . '")';
+        echo "<div><img src='" . $resGP[0] . "' id='" . $resGP[0] . "' onclick='" . $image . "' width = '350px', height='350px'></div>";
     }
+
+    $image_initial = $resultGP[0]["ph_chemin"];
+
+    echo "</div>
+    <div> <img src='" . $image_initial . "' id='grande_image'> </div>
+    
+    <script type='text/javascript'>
+
+        function changerImage(id){
+            document.getElementById('grande_image').src= id;
+        }    
+
+    </script>
+    
+
+    ";
+
+
+    echo "
+    <div>
+        <p>" . $result["pr_nom"] . "
+            <br>
+            " . $result["pr_description"] . "
+            <br>
+            " . $result['pr_coutHT'] . " € HT<br>+20% TVA
+            <br>
+            " . $prixTTC . "€ TTC " . $DispoMagasin . "
+            <br>
+            Stock internet: " . $result["pr_stockInternet"] . " disponibilités.
+        </p>
+    </div>
+    </div>";
 } else {
     header("Location: http://localhost/SLAM/AP3/AP3/");
     exit;
