@@ -19,14 +19,14 @@ if (isset($_GET["id"])) {
         }
     }
     //Avoir les infos de l'article 
-    $sql = "SELECT pr_id, pr_nom, pr_coutHT, pr_description, pr_stockInternet FROM `produit` WHERE pr_id=" . $_GET['id'];
+    $sql = "SELECT pr_reference, pr_nom, pr_coutHT, pr_description, pr_stockInternet FROM `produit` WHERE pr_reference=" . $_GET['id'];
     $bdd = getConnexion();
     $query = $bdd->prepare($sql);
     $query->execute();
     $result = $query->fetch();
 
     //Avoir les photos
-    $getPhoto = "SELECT ph_chemin FROM photos WHERE fk_pr = " . $result['pr_id'] . "; ";
+    $getPhoto = "SELECT ph_chemin FROM photos WHERE fk_pr = " . $result['pr_reference'] . "; ";
     $queryGP = $bdd->prepare($getPhoto);
     $queryGP->execute();
     $resultGP = $queryGP->fetchAll();
