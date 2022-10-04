@@ -15,7 +15,7 @@ function construct_()
     }
 }
 
-$sql = "SELECT cl_code, cl_nom, cl_prenom,cl_email, cl_adresse, cl_telephone, cl_dateNaissance FROM client WHERE cl_code = :code; ";
+$sql = "SELECT cl_code, cl_nom, cl_prenom, cl_adresse, cl_telephone, cl_dateNaissance , cl_email FROM client WHERE cl_code = :code; ";
 $code = $_SESSION['login'];
 $bdd = construct_();
 $query = $bdd->prepare($sql);
@@ -48,6 +48,10 @@ foreach ($res as $r) {
         <div class="containers">
             <div><h3>Prenom: </h3></div>
             <div>' . $prenom . '</div>
+        </div>
+        <div class="containers">
+            <div><h3>Email: </h3></div>
+            <div>' . $mail . '</div>
         </div>
         <div class="containers">
             <div><h3>Adresse: </h3></div>
