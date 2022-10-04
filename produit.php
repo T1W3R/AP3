@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if (session_status() === PHP_SESSION_NONE) {
     include "header_unconnected.php";
 } else {
@@ -39,7 +39,7 @@ if (isset($_GET["id"])) {
     $DispoMagasin = "";
     if ($resultGST != "none") {
         foreach ($resultGST as $resGST) {
-            $DispoMagasin .= "<br>" . $resGST["ma_lieu"] . ": " . $resGST["pr_stock"] . " disponibilités.";
+            $DispoMagasin .= "<br>" . $resGST["ma_lieu"] . ": " . $resGST["pr_stock"] . " produits disponible(s).";
         }
     }
 
