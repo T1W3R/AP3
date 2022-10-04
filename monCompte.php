@@ -38,7 +38,7 @@ foreach ($res as $r) {
 <center>
     <div>
         <div class="containers">
-            <div><h3>Code Client: </h3></div>
+            <div><h3>Code Client </h3></div>
             <div>' . $code . '</div>
         </div>
         <div class="containers">
@@ -67,7 +67,7 @@ foreach ($res as $r) {
         </div>
     </div>
 
-    <button href="deconnexion.php" class="btn btn-primary mb-3" style="background-color: #B19D7F; border-color: aliceblue; color: aliceblue;">Se déconnecter</button>
+    <a href="deconnexion.php" class="boutton">Se déconnecter</a>
 </center>
 ';
 };
