@@ -36,3 +36,22 @@ function SelectInfos(){
     $res = $query->fetchAll();
     return $res;
 }
+
+
+function InsertUser($nom, $prenom, $mail, $hash, $adress, $telephone, $birthdate)
+{
+
+    $insert = "INSERT INTO client(cl_nom, cl_prenom, cl_email, cl_mdp, cl_adresse, cl_telephone, cl_dateNaissance) VALUES(:nom, :prenom, :mail, :hash, :adress, :telephone, :birthdate);";
+
+    $bdd = construct_();
+    $query = $bdd->prepare($insert);
+    $query->execute(array(
+        ":nom" => $nom,
+        ":prenom" => $prenom,
+        ":mail" => $mail,
+        ":hash" => $hash,
+        ":adress" => $adress,
+        ":telephone" => $telephone,
+        ":birthdate" => $birthdate
+    ));
+}
