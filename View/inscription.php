@@ -2,9 +2,9 @@
 session_start();
 
 if (isset($_SESSION["login"])) {
-    include "header_connected.php";
+    include("../View/header_connected.php");
 } else {
-    include "header_unconnected.php";
+    include("../View/header_unconnected.php");
 };
 ?>
 
@@ -19,7 +19,7 @@ if (isset($_SESSION["login"])) {
             </div>
         </center>
 
-        <form method="POST" action="traitementinscription.php">
+        <form method="POST" action="../Controller/traitementInscription.php">
             <div class="mb-3 row">
                 <label for="inputnom" class="col-sm-2 col-form-label">Nom :</label>
                 <div class="col-sm-10">

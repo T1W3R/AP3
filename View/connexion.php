@@ -1,14 +1,17 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    include "header_unconnected.php";
+session_start();
+
+if (isset($_SESSION["login"])) {
+    include("../View/header_connected.php");
 } else {
-    include "header_connected.php";
+    include("../View/header_unconnected.php");
 };
+
 ?>
 <div style="background-color: #c1B89F; padding-top: 8vw;">
     <div style="background-color: #B19D7F; color: aliceblue; padding-left: 4vw; padding-right: 4vw; padding-top: 3vw; padding-bottom: 1vw; border-radius: 2vw; margin-left: 2vw; margin-right: 2vw;">
         <center>
-            <img src="images/tiny_logo.png" alt="tiny_logo" height=50vw>
+            <img src="../View/images/tiny_logo.png" alt="tiny_logo" height=50vw>
             <h1>Veuillez vous connectez :</h1>
             <div style="display : flex;justify-content: center;align-items: center;">
                 <p>Si vous ne possedez pas de compte, cliquez sur </p>
@@ -16,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
         </center>
 
-        <form method="POST" action="traitementconnexion.php">
+        <form method="POST" action="../Controller/traitementConnexion.php">
             <div class="mb-3 row">
                 <label for="inputpseudo" class="col-sm-2 col-form-label">Email :</label>
                 <div class="col-sm-10">
