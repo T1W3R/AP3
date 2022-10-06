@@ -18,7 +18,7 @@ $bdd = construct_();
 $queryUs = $bdd->prepare($updateStatus);
 $queryUs->execute();
 
-header('Location: http://localhost/SLAM/AP3/AP3/monPanier.php');
+header('Location: http://localhost/SLAM/AP3/AP3/Controller/monPanier.php');
 
 
 

@@ -2,6 +2,6 @@
 
 include("../Model/commandes.php");
 
-$result = SelectProduits();
+$res = getProduits();
 
 include("../View/index.php");
