@@ -29,7 +29,7 @@ if (sizeof($infosCo) >= 1){
     echo "<p> Prix total: ".$infosCo[0]["co_prixTotal"]." €";
 
     //Bouton valider et payer panier 
-    $link = "'ValidationPanier.php?id=".$infosCo[0]["co_id"]."'";
+    $link = "'http://localhost/SLAM/AP3/AP3/Controller/ValidationPanier.php?id=".$infosCo[0]["co_id"]."'";
     echo '<br><button type="button" onclick="window.location.href='.$link.'">Valider</button>';
 
 } else {
