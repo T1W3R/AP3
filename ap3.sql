@@ -196,10 +196,10 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`ph_id`, `ph_chemin`, `fk_pr`) VALUES
-(1, 'images/nike-revolution-6-nn2.jpg', '000000000001'),
-(2, 'images/nike-revolution-6-nn.jpg', '000000000001'),
-(3, 'images/nike_251136_BV6877_010_20210211T143858_01.jpg', '000000000002'),
-(4, 'images/nike_251136_BV6877_010_20210211T143900_02.jpg', '000000000002');
+(1, '../images/nike-revolution-6-nn2.jpg', '000000000001'),
+(2, '../images/nike-revolution-6-nn.jpg', '000000000001'),
+(3, '../images/nike_251136_BV6877_010_20210211T143858_01.jpg', '000000000002'),
+(4, '../images/nike_251136_BV6877_010_20210211T143900_02.jpg', '000000000002');
 
 -- --------------------------------------------------------
 
