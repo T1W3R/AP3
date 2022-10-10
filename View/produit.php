@@ -9,8 +9,9 @@
     $image_initial = $resultGP[0]["ph_chemin"];
 
     ?></div>
-    <div> <img src='" . $image_initial . "' id='grande_image'> </div>
-    
+    <?php
+    echo "<div> <img src='" . $image_initial . "' id='grande_image'> </div>";
+    ?>
     <script type='text/javascript'>
 
         function changerImage(id){
