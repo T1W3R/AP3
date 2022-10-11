@@ -38,15 +38,19 @@ if (sizeof($infosCo) >= 1) {
 
 foreach ($resultGCo as $resGCo) {
 
+    echo "<div class='PanierTxt'>";
     //Afficher les commandes Passee
     $resultGCP = getCommandePassee($resGCo);
 
-    $texte = "Commande numéro: " . $resultGCo[0]["co_id"] . " commandée le: " . $resultGCo[0]["co_date"] . "<br>Articles commandés: ";
+    $texte = "<p>Commande numéro: " . $resultGCo[0]["co_id"] . " commandée le: " . $resultGCo[0]["co_date"] . "<br>Articles commandés: ";
     foreach ($resultGCP as $resGCP) {
         $texte .= $resGCP["pr_nom"] . " (X" . $resGCP["pr_quantite"] . ") prix unitaire: " . $resGCP["pr_coutHT"] . " €<br>";
     }
     $texte .= "Expédié depuis: " . $resultGCP[0]["ls_libelle"] . ". Adresse de livraison: " . $resultGCP[0]["cl_adresse"];
+    $prixTotal = $resultGCP[0]["co_prixTotal"] * 1.20 + 5;
+    $texte .= "<br>Prix HT: ".$resultGCP[0]["co_prixTotal"]. " +20% TVA : ".number_format((float)$resultGCP[0]["co_prixTotal"] * 1.20, 2, '.', '')."€ + 5€ frais de port: ".number_format((float)$prixTotal, 2 , '.','')."€ </p>";
     echo $texte;
+    echo "</div>";
 }
 
 
