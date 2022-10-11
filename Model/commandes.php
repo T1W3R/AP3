@@ -112,6 +112,7 @@ function getCommandePassee($resGCo)
         JOIN lieustockage ON ls_id = fk_ls
         JOIN client ON fk_cl = cl_id
     WHERE co_id =" . $resGCo["co_id"] . ";";
+    $bdd = construct_();
     $queryGCP = $bdd->prepare($getCoPassee);
     $queryGCP->execute();
     $resultGCP = $queryGCP->fetchAll();
