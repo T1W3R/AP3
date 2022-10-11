@@ -1,43 +1,63 @@
-<div class='big-container'><div class='container'>
-
 <?php
-    foreach ($resultGP as $resGP) {
-        $image = 'changerImage("' . $resGP[0] . '")';
-        echo "<div><img src='" . $resGP[0] . "' id='" . $resGP[0] . "' onclick='" . $image . "' width = '350px', height='350px'></div>";
-    }
+session_start();
 
-    $image_initial = $resultGP[0]["ph_chemin"];
-
-    ?></div>
-    <?php
-    echo "<div> <img src='" . $image_initial . "' id='grande_image'> </div>";
-    ?>
-    <script type='text/javascript'>
-
-        function changerImage(id){
-            document.getElementById('grande_image').src= id;
-        }    
-
-    </script>
-    
-    <div>
-    <?php
-    echo "
-        <p>" . $result["pr_nom"] . "
-            <br>
-            " . $result["pr_description"] . "
-            <br>
-            " . $result['pr_coutHT'] . " € HT<br>+20% TVA
-            <br>
-            " . $prixTTC . "€ TTC " . $DispoMagasin . "
-            <br>
-            Stock internet: " . $result["pr_stockInternet"] . " disponibilités.
-        </p>
-    </div>
-    </div>";
-
+if (isset($_SESSION["login"])) {
+    include("../View/header_connected.php");
+} else {
+    include("../View/header_unconnected.php");
+};
 ?>
 
 
+<div class='big-container'>
+    <div class='images'>
+        <div class='container'>
 
-</html>
+            <?php
+            foreach ($resultGP as $resGP) {
+                $image = 'changerImage("' . $resGP[0] . '")';
+                echo "<div class='petiteImage'><img src='" . $resGP[0] . "' id='" . $resGP[0] . "' onclick='" . $image . "' height='150px'></div>";
+            }
+
+            $image_initial = $resultGP[0]["ph_chemin"];
+
+            ?>
+        </div>
+
+        <?php
+        echo "<div> <img src='" . $image_initial . "' id='grande_image' style='margin-left: 100px; margin-right: 100px; height: 700px;'> </div>";
+        ?>
+        <script type='text/javascript'>
+            function changerImage(id) {
+                document.getElementById('grande_image').src = id;
+            }
+        </script>
+    </div>
+
+    <div>
+        <?php
+        echo "
+        <h1 style='font-size: 50px; text-decoration: underline;'>" . $result["pr_nom"] . "</h1>
+            <p style='font-size: 20px;'>
+                " . $result["pr_description"] . "
+            </p>
+            <p>
+                " . $result['pr_coutHT'] . " € (+20% TVA)
+            </p>
+            <p style='font-size: 50px;'>
+                " . $prixTTC . "€ <span style='font-size: 20px;'>TTC</span>
+            </p>
+            <p>
+                " . $DispoMagasin . "
+            </p>
+            <p>
+                Stock internet: " . $result["pr_stockInternet"] . " disponibilités.
+            </p>
+    </div>
+    </div>";
+
+        ?>
+
+
+
+        </html>

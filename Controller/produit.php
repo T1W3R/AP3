@@ -1,10 +1,4 @@
 <?php
-session_start();
-if (session_status() === PHP_SESSION_NONE) {
-    include "../View/header_unconnected.php";
-} else {
-    include "../View/header_connected.php";
-};
 
 include "../Model/commandes.php";
 
