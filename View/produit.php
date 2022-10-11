@@ -16,7 +16,7 @@ if (isset($_SESSION["login"])) {
             <?php
             foreach ($resultGP as $resGP) {
                 $image = 'changerImage("' . $resGP[0] . '")';
-                echo "<div class='petiteImage'><img src='" . $resGP[0] . "' id='" . $resGP[0] . "' onclick='" . $image . "' height='150px'></div>";
+                echo "<div class='petiteImage'><img src='" . $resGP[0] . "' id='" . $resGP[0] . "' onclick='" . $image . "' height='150px' width='150px'></div>";
             }
 
             $image_initial = $resultGP[0]["ph_chemin"];
@@ -25,7 +25,7 @@ if (isset($_SESSION["login"])) {
         </div>
 
         <?php
-        echo "<div> <img src='" . $image_initial . "' id='grande_image' style='margin-left: 100px; margin-right: 100px; height: 700px;'> </div>";
+        echo "<div> <img src='" . $image_initial . "' id='grande_image' style='border: 1px solid white; margin-left: 100px; margin-right: 100px; border-radius: 15px' height='700px' witdh='700px'> </div>";
         ?>
         <script type='text/javascript'>
             function changerImage(id) {
@@ -34,18 +34,18 @@ if (isset($_SESSION["login"])) {
         </script>
     </div>
 
-    <div>
+    <div style="margin-right: 50px">
         <?php
         echo "
         <h1 style='font-size: 50px; text-decoration: underline;'>" . $result["pr_nom"] . "</h1>
-            <p style='font-size: 20px;'>
+            <p style='font-size: 20px; '>
                 " . $result["pr_description"] . "
             </p>
             <p>
                 " . $result['pr_coutHT'] . " € (+20% TVA)
             </p>
             <p style='font-size: 50px;'>
-                " . $prixTTC . "€ <span style='font-size: 20px;'>TTC</span>
+                <b>" . $prixTTC . "€  </b><span style='font-size: 20px;'>TTC</span>
             </p>
             <p>
                 " . $DispoMagasin . "

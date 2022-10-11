@@ -41,6 +41,7 @@ button {
     flex-direction: row;
     justify-content: space-around;
     background-color: #c1B89F;
+    flex-wrap: wrap;
 }
 
 .produitIndividuel {

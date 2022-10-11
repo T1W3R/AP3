@@ -15,10 +15,17 @@ if (isset($_SESSION["login"])) {
 <div class="produits">
 
     <?php
-        foreach ($res as $result){
-            $resultGP = getPhotos($result);
-            echo '<a href="http://localhost/SLAM/AP3/AP3/Controller/produit.php?id=' . $result['pr_reference'] . '"> <div class="produitIndividuel"><img id="imgproduit" src="' . $resultGP[0] . '" width = 450px, height=450px><br>' . $result['pr_nom'] . " <p>" . $result['pr_coutHT'] . '€ HT</p></div> </a>';
-        }
+    foreach ($res as $result) {
+        $resultGP = getPhotos($result);
+        echo '
+        <a href="http://localhost/SLAM/AP3/AP3/Controller/produit.php?id=' . $result['pr_reference'] . '">
+            <div class="produitIndividuel">
+                <img id="imgproduit" src="' . $resultGP[0] . '" width = 450px, height=450px style="border: 1px solid white;">
+                <p style="text-decoration: underline; margin-bottom: 0px; font-size: 30px;">' . $result['pr_nom'] . '</p>
+                <p style="font-size: 30px;">' . $result['pr_coutHT'] . '€<span style="font-size: 15px;">HT</span></p>
+            </div>
+        </a>';
+    }
     ?>
 
 </div>
