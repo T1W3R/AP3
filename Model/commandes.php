@@ -119,7 +119,8 @@ function getCommandePassee($resGCo)
     return $resultGCP;
 }
 
-function getInfoArticle(){
+function getInfoArticle()
+{
     $sql = "SELECT pr_reference, pr_nom, pr_coutHT, pr_description, pr_stockInternet FROM `produit` WHERE pr_reference=" . $_GET['id'];
     $bdd = construct_();
     $query = $bdd->prepare($sql);
@@ -128,7 +129,8 @@ function getInfoArticle(){
     return $result;
 }
 
-function getPhotosProduit($result){
+function getPhotosProduit($result)
+{
     $getPhoto = "SELECT ph_chemin FROM photos WHERE fk_pr = " . $result['pr_reference'] . "; ";
     $bdd = construct_();
     $queryGP = $bdd->prepare($getPhoto);
@@ -137,7 +139,8 @@ function getPhotosProduit($result){
     return $resultGP;
 }
 
-function getStockMagasin($id){
+function getStockMagasin($id)
+{
     $getStockMagasin = "SELECT pr_stock, ma_lieu FROM a_en_stock JOIN magasin ON fk_ma = ma_id WHERE fk_pr = " . $id;
     $bdd = construct_();
     $queryGST = $bdd->prepare($getStockMagasin);
@@ -150,4 +153,14 @@ function getStockMagasin($id){
         }
     }
     return $DispoMagasin;
+}
+
+function getRayons()
+{
+    $sql = "SELECT ra_libelle FROM rayon;";
+    $bdd = construct_();
+    $query = $bdd->prepare($sql);
+    $query->execute();
+    $result = $query->fetchAll();
+    return $result;
 }
