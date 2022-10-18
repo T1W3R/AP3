@@ -20,7 +20,18 @@ function VerifUser($hash, $mail)
 function getProduits()
 {
 
-    $sql = "SELECT pr_reference, pr_nom, pr_coutHT FROM `produit`;";
+    $sql = "SELECT pr_reference, pr_nom, pr_coutHT FROM produit;";
+    $bdd = construct_();
+    $query = $bdd->prepare($sql);
+    $query->execute();
+    $result = $query->fetchAll();
+    return $result;
+}
+
+function getProduitsByRayon($rayon)
+{
+
+    $sql = "SELECT pr_reference, pr_nom, pr_coutHT FROM produit WHERE fk_rayon = '" . $rayon . "';";
     $bdd = construct_();
     $query = $bdd->prepare($sql);
     $query->execute();
@@ -157,7 +168,7 @@ function getStockMagasin($id)
 
 function getRayons()
 {
-    $sql = "SELECT ra_libelle FROM rayon;";
+    $sql = "SELECT ra_libelle, ra_id FROM rayon;";
     $bdd = construct_();
     $query = $bdd->prepare($sql);
     $query->execute();

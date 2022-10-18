@@ -15,7 +15,7 @@ if (isset($_SESSION["login"])) {
     <?php
     foreach ($ray as $rayon) {
         echo '
-            <a href="http://localhost/SLAM/AP3/AP3/Controller/rayon.php?id=' . $rayon['ra_libelle'] . '">
+            <a href="http://localhost/SLAM/AP3/AP3/Controller/rayon.php?id=' . $rayon['ra_id'] . '">
                 <div class="rayon" width="50%">
                     <p><b>' . $rayon['ra_libelle'] . '</b></p>
                 </div>
@@ -24,11 +24,15 @@ if (isset($_SESSION["login"])) {
     ?>
 </div>
 
-<h2>Actualités</h2>
+<h2>Produits</h2>
 
 <div class="produits">
 
     <?php
+    if (empty($res)) {
+        echo "<h4> Ce rayon ne possede pas d'articles";
+    }
+
     foreach ($res as $result) {
         $resultGP = getPhotos($result);
         echo '
