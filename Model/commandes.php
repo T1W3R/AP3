@@ -31,7 +31,7 @@ function getProduits()
 function getProduitsByRayon($rayon)
 {
 
-    $sql = "SELECT pr_reference, pr_nom, pr_coutHT FROM produit WHERE fk_rayon = '" . $rayon . "';";
+    $sql = "SELECT pr_reference, pr_nom, pr_coutHT FROM produit WHERE fk_rayon = '" . $rayon . "' ;";
     $bdd = construct_();
     $query = $bdd->prepare($sql);
     $query->execute();
@@ -174,4 +174,13 @@ function getRayons()
     $query->execute();
     $result = $query->fetchAll();
     return $result;
+}
+
+function insertElementDansPanier($idpanier, $idProduit)
+{
+    $insert = "INSERT INTO client(cl_nom, cl_prenom, cl_email, cl_mdp, cl_adresse, cl_telephone, cl_dateNaissance) VALUES(:nom, :prenom, :mail, :hash, :adress, :telephone, :birthdate);";
+
+    $bdd = construct_();
+    $query = $bdd->prepare($insert);
+    $query->execute();
 }
