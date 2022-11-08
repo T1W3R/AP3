@@ -175,12 +175,3 @@ function getRayons()
     $result = $query->fetchAll();
     return $result;
 }
-
-function insertElementDansPanier($idpanier, $idProduit)
-{
-    $insert = "INSERT INTO client(cl_nom, cl_prenom, cl_email, cl_mdp, cl_adresse, cl_telephone, cl_dateNaissance) VALUES(:nom, :prenom, :mail, :hash, :adress, :telephone, :birthdate);";
-
-    $bdd = construct_();
-    $query = $bdd->prepare($insert);
-    $query->execute();
-}
