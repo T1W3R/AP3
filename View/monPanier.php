@@ -48,11 +48,11 @@ foreach ($resultGCo as $resGCo) {
     }
     //Afficher les commandes Passee
     $resultGCP = getCommandePassee($resGCo);
-
     $texte = "<div style='padding-left: 200px;
         padding-right: 200px;
-        font-size:18px'>
-    <p><h3 style='text-align: center'><u>Commande numéro " . $resultGCo[0]["co_id"] . ": </h3>Commandée le:</u> " . $resultGCo[0]["co_date"] . "<br><u>Articles commandés:</u> <ul>";
+        font-size:18px;
+        text-align: center'>
+    <p><h3><u>Commande numéro " . $resultGCo[0]["co_id"] . ": </h3>Commandée le:</u> " . $resultGCo[0]["co_date"] . "<br><u>Articles commandés:</u> <ul>";
     foreach ($resultGCP as $resGCP) {
         $texte .= "<li>" . $resGCP["pr_nom"] . " (X" . $resGCP["pr_quantite"] . ") prix unitaire: " . $resGCP["pr_coutHT"] . " €</li>";
     }
