@@ -1,18 +1,19 @@
 <style>
-  .produits{
-    display: flex;
-  }
-  .produit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 30px;
-    margin: auto;
-    text-align: center;
+.produits{
+  display: flex;
+}
+.produit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  margin: auto;
+  text-align: center;
 }
 .panier {
   position: fixed;
-  bottom: 200px;
+  bottom: 50px;
+  max-height: 150px;
   border-top: 1px solid black;
 }
 </style>
@@ -38,7 +39,7 @@ foreach ($articles as $article) {
 echo "</div><div class='panier'><h1>Panier en cours</h1>";
   if (isset($_SESSION["panier"])) {
     foreach ($_SESSION["panier"] as $key => $value) {
-      echo $key." => ". $value." <br>";
+      echo getArticleById($key)." quantité: ". $value." <br>";
     }
   } else {
     echo "La panier est pour l'instant vide";

@@ -56,6 +56,16 @@ function getImagesArticles($article){
     return $result;
 }
 
+function getArticleById($id){
+  $sql = "SELECT pr_nom FROM `produit` WHERE pr_reference = '".$id."'";
+  $bdd = construct_();
+  $query = $bdd->prepare($sql);
+  $query->execute();
+  $result = $query->fetch();
+
+  return $result["pr_nom"];
+}
+
 
 
 
