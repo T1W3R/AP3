@@ -53,12 +53,14 @@ if (isset($_SESSION["login"])) {
             <p>
                 Stock internet: " . $result["pr_stockInternet"] . " disponibilités.
             </p>"; ?>
-
-        <form method='POST' action='../Controller/Panier.php'>
-            <button type="submit" class="bouttonAjoutPanier">
-                <p> Ajouter au Panier </p>
-            </button>
-        </form>
+            <form method='POST' action='../Controller/Panier.php'>
+                <input style="color: aliceblue; background-color: #B19D7F; margin-bottom: 15px; height: 40px; font-size: 15px; width:100px; border-radius: 5px; border: none; text-align: center;" type="number" min="1" value="1">
+                    <br>
+                <button type="submit" class="bouttonAjoutPanier">
+                    <p> Ajouter au Panier </p>
+                </button>
+                    
+            </form>
     </div>
 </div>
 

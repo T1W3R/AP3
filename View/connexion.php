@@ -19,7 +19,7 @@ if (isset($_SESSION["login"])) {
             </div>
         </center>
 
-        <form method="POST" action="../Controller/traitementConnexion.php">
+        <form method="POST" action="traitementConnexion.php">
             <div class="mb-3 row">
                 <label for="inputpseudo" class="col-sm-2 col-form-label">Email :</label>
                 <div class="col-sm-10">

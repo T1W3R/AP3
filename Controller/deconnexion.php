@@ -1,5 +1,5 @@
 <?php
 	session_start();
 	session_destroy();
-	header('Location: http://localhost/SLAM/Ap3/ap3/Controller/index.php');
+	header('Location: index.php');
 ?>

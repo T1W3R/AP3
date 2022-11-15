@@ -13,16 +13,16 @@ if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
 
     if (!empty($res['cl_code'])) {
         $_SESSION["login"] = $res['cl_code'];
-        header('Location: http://localhost/SLAM/AP3/ap3/Controller/index.php');
+        header('Location: index.php');
         exit();
     } else {
-        header('Location: http://localhost/SLAM/AP3/ap3/Controller/connexion.php');
+        header('Location: connexion.php');
         exit();
         $message = "probleme de connection";
         echo '<script type="text/javascript"> alert(' . $message . ')</script>';
     }
 
 } else {
-    header('Location: http://localhost/SLAM/AP3/ap3/Controller/connexion.php');
+    header('Location: connexion.php');
     exit();
 }

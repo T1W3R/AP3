@@ -14,11 +14,11 @@
     <header>
         <div class="magasin">
             <img src="../images/store.png" alt="store.png" height=13px>
-            <a href="http://localhost/SLAM/AP3/AP3/Controller/index.php" id="liens">Nos Magasins</a>
+            <a href="index.php" id="liens">Nos Magasins</a>
         </div>
-        <div class="logo"><a href="http://localhost/SLAM/AP3/AP3/Controller/index.php"><img src="../images/logo.png" alt="logo.png" height=20px></a></div>
+        <div class="logo"><a href="index.php"><img src="../images/logo.png" alt="logo.png" height=20px></a></div>
         <div class="magasin">
-            <a href="http://localhost/SLAM/AP3/AP3/Controller/connexion.php" id="liens">
+            <a href="connexion.php" id="liens">
                 <img src="../images/perso.png" alt="perso.png" height=13px>
                 Se Connecter
             </a>

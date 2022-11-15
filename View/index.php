@@ -15,7 +15,7 @@ if (isset($_SESSION["login"])) {
     <?php
     foreach ($ray as $rayon) {
         echo '
-            <a href="http://localhost/SLAM/AP3/AP3/Controller/rayon.php?id=' . $rayon['ra_libelle'] . '">
+            <a href="rayon.php?id=' . $rayon['ra_libelle'] . '">
                 <div class="rayon" width="50%">
                     <p><b>' . $rayon['ra_libelle'] . '</b></p>
                 </div>
@@ -32,7 +32,7 @@ if (isset($_SESSION["login"])) {
     foreach ($res as $result) {
         $resultGP = getPhotos($result);
         echo '
-        <a href="http://localhost/SLAM/AP3/AP3/Controller/produit.php?id=' . $result['pr_reference'] . '">
+        <a href="produit.php?id=' . $result['pr_reference'] . '">
             <div class="produitIndividuel" width="50%">
                 <img id="imgproduit" src="' . $resultGP[0] . '" width = 450px, height=450px style="border: 1px solid white;">
                 <p style="text-decoration: underline; margin-bottom: 0px; font-size: 30px;">' . $result['pr_nom'] . '</p>
