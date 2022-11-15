@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le : mar. 27 sep. 2022 à 15:37
+-- Généré le : mar. 15 nov. 2022 à 13:29
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.24
 
@@ -33,6 +33,14 @@ CREATE TABLE `a_en_stock` (
   `fk_ma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `a_en_stock`
+--
+
+INSERT INTO `a_en_stock` (`pr_stock`, `fk_pr`, `fk_ma`) VALUES
+(69, '000000000001', 1),
+(89, '000000000002', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -56,7 +64,8 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`cl_id`, `cl_code`, `cl_nom`, `cl_prenom`, `cl_mdp`, `cl_adresse`, `cl_email`, `cl_telephone`, `cl_dateNaissance`) VALUES
-(1, 'CL00000001', 'o²o', 'oooo', '72905e7b32d847468edcdbf99f7d218e466cd828300306f1d9f8c3e0512e44fe4394644b581ed52656a2870c9a67c592bc40ca322099aa52bf528c54f9cabde0', '25 rue zzzzz', 'ooooooo@gmail.com', '0658985412', '0000-00-00');
+(1, 'CL00000001', 'o²o', 'oooo', '72905e7b32d847468edcdbf99f7d218e466cd828300306f1d9f8c3e0512e44fe4394644b581ed52656a2870c9a67c592bc40ca322099aa52bf528c54f9cabde0', '25 rue zzzzz', 'ooooooo@gmail.com', '0658985412', '0000-00-00'),
+(2, 'CL00000002', 'tiwer', 'kjzef', '40d306df4fbffce56c38ce96948d6bac43f8f0eb91a7918e0bb6ebb31e1f6d9fdf9de33c31f9bc0d79cf9453040b78ab6d24f4893cef2b4187ffb504635ea906', '24 rue du beguinage Assevent', '55555@gmail.com', '0783454837', '2003-01-28');
 
 -- --------------------------------------------------------
 
@@ -77,7 +86,8 @@ CREATE TABLE `commande` (
 --
 
 INSERT INTO `commande` (`co_id`, `co_date`, `co_prixTotal`, `co_statut`, `fk_cl`) VALUES
-(2, '2022-09-27', 80.59, 'En attente', 1);
+(2, '2022-09-27', 80.59, 'transmise', 1),
+(3, '2022-09-27', 35.99, 'transmise', 1);
 
 -- --------------------------------------------------------
 
@@ -160,6 +170,14 @@ CREATE TABLE `lie_a` (
   `fk_co` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `lie_a`
+--
+
+INSERT INTO `lie_a` (`pr_quantite`, `fk_pr`, `fk_co`) VALUES
+(3, '000000000002', 2),
+(1, '000000000002', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -168,16 +186,18 @@ CREATE TABLE `lie_a` (
 
 CREATE TABLE `magasin` (
   `ma_id` int(11) NOT NULL,
-  `ma_lieu` varchar(45) NOT NULL
+  `ma_lieu` varchar(45) NOT NULL,
+  `ma_login` varchar(45) NOT NULL,
+  `ma_mdp` varchar(125) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `magasin`
 --
 
-INSERT INTO `magasin` (`ma_id`, `ma_lieu`) VALUES
-(1, 'Paris'),
-(2, 'Tours');
+INSERT INTO `magasin` (`ma_id`, `ma_lieu`, `ma_login`, `ma_mdp`) VALUES
+(1, 'Paris', 'A4Fparis', '123456'),
+(2, 'Tours', 'A4Ftours', '123456');
 
 -- --------------------------------------------------------
 
@@ -199,7 +219,13 @@ INSERT INTO `photos` (`ph_id`, `ph_chemin`, `fk_pr`) VALUES
 (1, '../images/nike-revolution-6-nn2.jpg', '000000000001'),
 (2, '../images/nike-revolution-6-nn.jpg', '000000000001'),
 (3, '../images/nike_251136_BV6877_010_20210211T143858_01.jpg', '000000000002'),
-(4, '../images/nike_251136_BV6877_010_20210211T143900_02.jpg', '000000000002');
+(4, '../images/nike_251136_BV6877_010_20210211T143900_02.jpg', '000000000002'),
+(5, '../images/haltere1.jpg', '000000000003'),
+(6, '../images/haltere2.jpg', '000000000003'),
+(7, '../images/haltere3.jpg', '000000000003'),
+(8, '../images/planche1.jpg', '000000000004'),
+(9, '../images/planche2.jpg', '000000000004'),
+(10, '../images/planche3.jpg', '000000000004');
 
 -- --------------------------------------------------------
 
@@ -234,7 +260,9 @@ CREATE TABLE `produit` (
 
 INSERT INTO `produit` (`pr_nom`, `pr_reference`, `pr_coutHT`, `pr_description`, `pr_stockInternet`, `fk_fournisseur`, `fk_rayon`) VALUES
 ('Chaussures nike', '000000000001', 12.54, 'Chaussures nike sport', 1, 'NIK', 'FOO'),
-('Jogging nike', '000000000002', 75.56, 'Jogging nike sport', 12, 'NIK', 'FOO');
+('Jogging NIKE', '000000000002', 75.56, 'Jogging nike sport', 12, 'NIK', 'FOO'),
+('SONGMICS haltères', '000000000003', 35.99, 'SCULPTEZ VOTRE CORPS : Les équipements de sports SONGMICS vous aident à faire du sport au travail ou à la maison. Remuez-vous et commencez dès maintenant !', 16, 'NIK', 'MUS'),
+('PLANCHE NATATION PISCINE BLEU ROSE', '000000000004', 7.51, 'Besoin de support lors de vos exercices ? Cette planche de natation en mousse offre une grande flottabilité pour les nageurs désirant avoir un support lors du travail des jambes ou de l\'apprentissage.', 60, 'NIK', 'NAT');
 
 -- --------------------------------------------------------
 
@@ -252,7 +280,13 @@ CREATE TABLE `rayon` (
 --
 
 INSERT INTO `rayon` (`ra_id`, `ra_libelle`) VALUES
+('ATH', 'Athletisme'),
+('BOW', 'Bowling'),
+('CUR', 'Curling'),
+('EQU', 'Equitation'),
 ('FOO', 'Football'),
+('MUS', 'Musculation'),
+('NAT', 'Natation'),
 ('VOL', 'Volley');
 
 --
@@ -354,13 +388,13 @@ ALTER TABLE `rayon`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `cl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `enfant`
@@ -384,7 +418,7 @@ ALTER TABLE `magasin`
 -- AUTO_INCREMENT pour la table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `ph_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ph_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Contraintes pour les tables déchargées
