@@ -15,26 +15,37 @@ foreach ($_SESSION["panier"] as $key => $value) {
     // Avoir un photo pour chaque produit.
     $photo = getPhoto($key);
 
-    // Avoir le prix total de chaque(s) article(s)
+    // Avoir les infos chaque(s) article(s)
     $infos = getInfoArt($key);
+
+    // Avoir le Prix TTC chaque(s) article(s)
+    $prixTTC = GetPrixTotal($infos, $key);
 
     //Afficher chaque produits du panier avec le nombre de produits
     echo "<div style='border: 1px solid black;'><a href='produit.php?id=" . $infos["pr_reference"] . "' style='display: flex;align-items: center;''><img src='" . $photo[0] . "' width = '100px', height='100px'><p>" . $infos["pr_nom"] . " (X" . $value . ") " . $prixTTC . " €</p></a></div><br>";
 }
 
 
-if (sizeof($infosCo) >= 1) {
+if (isset($_SESSION["panier"])) {
+
+    $prixTotal = 0;
+    foreach ($_SESSION["panier"] as $key => $value) {
+        $infos = getInfoArt($key);
+        $prixTTC = GetPrixTotal($infos, $key);
+
+        $prixTotal += $prixTTC;
+    }
 
     //Afficher le prix total
-    echo "<p> Prix total: " . $infosCo[0]["co_prixTotal"] . " €";
+    echo "<p> Prix total: " . $prixTotal . " €";
 
     //Bouton valider et payer panier
-    $link = "'../ValidationPanier.php?id=" . $infosCo[0]["co_id"] . "'";
-    echo '<br><button type="button" onclick="window.location.href=' . $link . '">Valider</button>';
-} else {
+    echo '<br><button type="button" onclick="Commande.php">Valider</button>';
 
+} else {
     echo "<center><h3>Votre panier est vide</h3></center>";
-}
+} 
+
 
 echo "<br><hr style='border: none; background-color: aliceblue; height:1px;'>
 <h2>Commandes précédentes</h2>";
