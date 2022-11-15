@@ -15,7 +15,7 @@ function logMagasin($login, $mdp){
 }
 
 function getArticles($ma_id){
-      $sql = "SELECT pr_nom, pr_reference
+      $sql = "SELECT pr_nom, pr_reference, pr_reference
               FROM produit
               	JOIN a_en_stock ON pr_reference = fk_pr
               WHERE fk_ma = ". $ma_id .";";
