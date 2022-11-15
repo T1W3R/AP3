@@ -10,6 +10,11 @@
     margin: auto;
     text-align: center;
 }
+.panier {
+  position: fixed;
+  bottom: 200px;
+  border-top: 1px solid black;
+}
 </style>
 
 <?php
@@ -21,7 +26,8 @@ foreach ($articles as $article) {
   <form action='../Controller/VenteMagasinArticles.php' method='post'>
   <img width='400px' src='". $image["ph_chemin"] ."'>
   <br>".$article["pr_nom"]."<br>
-  <label for='quantite'>Quantitée: </label><br><input id='quantite' type='number' name='quantite'>
+  <label for='quantite'>Quantitée: </label><br>
+  <input id='quantite' type='number' min='1' name='quantite'>
   <input type='hidden' name='id' value='".$article["pr_reference"]."'>
   <br><br>
   <button type='submit'>Ajouter au panier</button>
@@ -29,7 +35,13 @@ foreach ($articles as $article) {
   </div> ";
 }
 
+echo "</div><div class='panier'><h1>Panier en cours</h1>";
+  if (isset($_SESSION["panier"])) {
+    foreach ($_SESSION["panier"] as $key => $value) {
+      echo $key." => ". $value." <br>";
+    }
+  } else {
+    echo "La panier est pour l'instant vide";
+  }
 echo "</div>";
-
-
  ?>

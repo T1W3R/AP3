@@ -1,5 +1,5 @@
 <?php
-  include("headerMagasin.php")
+  include("headerMagasin.php");
 ?>
 <style media="screen">
   input{
@@ -16,7 +16,7 @@
     <br><br>
 
     <label for="Mdp">Mot de passe:</label><br>
-    <input type="text" name="Mdp" id ="Mdp" placeholder="Entrer votre mdp magasin ici">
+    <input type="password" name="Mdp" id ="Mdp" placeholder="Entrer votre mdp magasin ici">
 
     <br><br>
 

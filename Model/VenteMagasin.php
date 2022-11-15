@@ -14,6 +14,20 @@ function logMagasin($login, $mdp){
   }
 }
 
+function isLoggedMagasin($login){
+  $sql = "SELECT ma_login, ma_id FROM `magasin` WHERE ma_login = '".$login."'";
+  $bdd = construct_();
+  $query = $bdd->prepare($sql);
+  $query->execute();
+  $result = $query->fetch();
+
+  if ($result != "none") {
+    return $result;
+  } else {
+    return false;
+  }
+}
+
 function getArticles($ma_id){
       $sql = "SELECT pr_nom, pr_reference, pr_reference
               FROM produit
