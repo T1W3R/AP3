@@ -9,16 +9,17 @@ include("header_connected.php");
 
 
 <?php
-foreach ($infosCo as $res) {
+
+foreach ($_SESSION["panier"] as $key => $value) {
 
     // Avoir un photo pour chaque produit.
-    $resultGP = getPhotos($res);
+    $photo = getPhoto($key);
 
     // Avoir le prix total de chaque(s) article(s)
-    $prixTTC = GetPrixTotal($res);
+    $infos = getInfoArt($key);
 
     //Afficher chaque produits du panier avec le nombre de produits
-    echo "<div style='border: 1px solid black;'><a href='../produit.php?id=" . $res["pr_reference"] . "' style='display: flex;align-items: center;''><img src='" . $resultGP[0] . "' width = '100px', height='100px'><p>" . $res["pr_nom"] . " (X" . $res["pr_quantite"] . ") " . $prixTTC . " €</p></a></div><br>";
+    echo "<div style='border: 1px solid black;'><a href='produit.php?id=" . $infos["pr_reference"] . "' style='display: flex;align-items: center;''><img src='" . $photo[0] . "' width = '100px', height='100px'><p>" . $infos["pr_nom"] . " (X" . $value . ") " . $prixTTC . " €</p></a></div><br>";
 }
 
 

@@ -100,6 +100,16 @@ function getPhotos($res)
     return $resultGP;
 }
 
+function getPhoto($res)
+{
+    $getPhoto = "SELECT ph_chemin FROM photos WHERE fk_pr = " . $res . " LIMIT 1; ";
+    $bdd = construct_();
+    $queryGP = $bdd->prepare($getPhoto);
+    $queryGP->execute();
+    $resultGP = $queryGP->fetch();
+    return $resultGP;
+}
+
 function getAllCommandes($infosCl)
 {
     $getCommandes = "SELECT co_id, co_date, co_prixTotal, cl_adresse
@@ -133,6 +143,16 @@ function getCommandePassee($resGCo)
 function getInfoArticle()
 {
     $sql = "SELECT pr_reference, pr_nom, pr_coutHT, pr_description, pr_stockInternet FROM `produit` WHERE pr_reference=" . $_GET['id'];
+    $bdd = construct_();
+    $query = $bdd->prepare($sql);
+    $query->execute();
+    $result = $query->fetch();
+    return $result;
+}
+
+function getInfoArt($res)
+{
+    $sql = "SELECT pr_reference, pr_nom, pr_coutHT, pr_description, pr_stockInternet FROM `produit` WHERE pr_reference=" . $res;
     $bdd = construct_();
     $query = $bdd->prepare($sql);
     $query->execute();

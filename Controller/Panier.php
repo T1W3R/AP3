@@ -3,13 +3,17 @@ session_start();
 
 include "../Model/commandes.php";
 
-$idProduit = $_POST['id'];
-$id = getIdClient();
-$idpanier = getInfoCommande($id);
+$idProduit = $_POST['idProduit'];
+$quantite = $_POST['quantite'];
 
-if (empty($idpanier)) {
-    var_dump("pas de panier vreer un");
-} else {
-    //insert dans le panier
-    insertElementDansPanier($idpanier);
+
+if (!isset($_SESSION["panier"])) {
+    $_SESSION["panier"] = [];
 }
+
+$_SESSION["panier"] += [$idProduit => $quantite];
+
+header('Location: MonPanier.php');
+exit();
+
+ ?>
