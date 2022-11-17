@@ -39,7 +39,7 @@ if (isset($_SESSION["panier"])) {
                     <div>
                         <input type='text' readonly='true' value='" . $value . "' min='0' onchange='changementQuantite()' style='color: aliceblue; background-color: #B19D7F; margin-left: 15px; margin-right: 5px; height: 20px; width: 76px; font-size: 15px; border-radius: 5px 5px 0px 0px; border: none; text-align: center;'> 
                         <div style='display: flex; margin-left: 15px;'>
-                            <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 0px 5px; height: 20px; width: 40px' href='MoinsSession.php?id=". $infos["pr_reference"] ."'>-</a>
+                            <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 0px 5px; height: 20px; width: 40px' href='MoinSession.php?id=". $infos["pr_reference"] ."'>-</a>
                             <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 5px 0px; height: 20px; width: 40px' href='PlusSession.php?id=". $infos["pr_reference"] ."'>+</a>
                         </div>
                     </div>
