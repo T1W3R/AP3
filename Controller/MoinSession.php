@@ -8,6 +8,7 @@
         if ($_SESSION["panier"][$idProduit] > 1){
             $_SESSION["panier"][$idProduit] -= 1;
         } else {
+            unset($_SESSION['panier'][$idProduit]);
         }
     }
 

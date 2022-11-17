@@ -195,3 +195,38 @@ function getRayons()
     $result = $query->fetchAll();
     return $result;
 }
+
+function InsertCommande($prixTotal, $idClient){
+    $insert = "INSERT INTO `commande` (`co_date`, `co_prixTotal`, `co_statut`, `fk_cl`) VALUES (current_timestamp(), :prixTotal, 'transmise', :idClient);";
+
+    $bdd = construct_();
+    $query = $bdd->prepare($insert);
+    $query->execute(array(
+        ":prixTotal" => $prixTotal,
+        ":idClient" => $idClient[0]
+    ));
+}
+
+function getIdCommande($idClient)
+{
+    $getIdCommande = "SELECT co_id FROM `commande` WHERE fk_cl = ". $idClient[0] ." ORDER BY co_id DESC LIMIT 1;";
+    $bdd = construct_();
+    $queryIC = $bdd->prepare($getIdCommande);
+    $queryIC->execute();
+    $resultIC = $queryIC->fetch();
+    return $resultIC;
+}
+
+function InsertProduitsCommande($idCommande, $ref, $quantite)
+{
+
+    $insert = "INSERT INTO `lie_a` (`pr_quantite`, `fk_pr`, `fk_co`) VALUES (:quantite, :ref, :idCommande);";
+
+    $bdd = construct_();
+    $query = $bdd->prepare($insert);
+    $query->execute(array(
+        ":idCommande" => $idCommande[0],
+        ":ref" => $ref,
+        ":quantite" => $quantite
+    ));
+}

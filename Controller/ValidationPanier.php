@@ -1,22 +1,22 @@
 <?php
 session_start();
+include("../Model/commandes.php");
 
-function construct_()
-{
+$prixTotal = $_POST['prixTotal'];
+$idClient = getIdClient();
 
-    $dsn = 'mysql:dbname=ap3;host=127.0.0.1:3308';
+//creer une commande
+InsertCommande($prixTotal, $idClient);
 
-    try {
-        $bdd = new PDO($dsn, "root", "");
-        return $bdd;
-    } catch (PDOException $e) {
-        die('DB Error: ' . $e->getMessage());
-    }
+//creer recuperer l'id de la commande
+$idCommande = getIdCommande($idClient);
+
+//inserer dans les lie a
+foreach ($_SESSION["panier"] as $ref => $quantite) {
+    InsertProduitsCommande($idCommande, $ref, $quantite);
 }
 
-$updateStatus = "UPDATE `commande` SET `co_statut`='transmise' WHERE co_id =" . $_GET["id"];
-$bdd = construct_();
-$queryUs = $bdd->prepare($updateStatus);
-$queryUs->execute();
+unset($_SESSION['panier']);
 
 header('Location: http://localhost/SLAM/AP3/AP3/Controller/monPanier.php');
+exit();

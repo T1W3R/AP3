@@ -30,14 +30,14 @@ if (isset($_SESSION["panier"])) {
 
 
         //Afficher chaque produits du panier avec le nombre de produits
-        echo "
+        echo "<form method='POST' action='ValidationPanier.php'>
                 <div style='display: flex; align-items: center;'>
                     <a href='produit.php?id=" . $infos["pr_reference"] . "' style='display: flex; align-items: center;'>
                         <img  style='margin-left: 15px; margin-top: 15px; margin-bottom: 15px' src='" . $photo[0] . "' width = '100px', height='100px'>
                         <p style='margin-left: 15px; font-size: 20px; text-decoration: underline;'>" . $infos["pr_nom"] . "</p>
                     </a>
                     <div>
-                        <input type='text' readonly='true' value='" . $value . "' min='0' onchange='changementQuantite()' style='color: aliceblue; background-color: #B19D7F; margin-left: 15px; margin-right: 5px; height: 20px; width: 76px; font-size: 15px; border-radius: 5px 5px 0px 0px; border: none; text-align: center;'> 
+                        <input type='text' readonly='true' value='" . $value . "' min='0' style='color: aliceblue; background-color: #B19D7F; margin-left: 15px; margin-right: 5px; height: 20px; width: 76px; font-size: 15px; border-radius: 5px 5px 0px 0px; border: none; text-align: center;'> 
                         <div style='display: flex; margin-left: 15px;'>
                             <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 0px 5px; height: 20px; width: 40px' href='MoinSession.php?id=". $infos["pr_reference"] ."'>-</a>
                             <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 5px 0px; height: 20px; width: 40px' href='PlusSession.php?id=". $infos["pr_reference"] ."'>+</a>
@@ -58,10 +58,11 @@ if (isset($_SESSION["panier"])) {
     
 
     //Afficher le prix total
-    echo "<center><p> Total du panier : <span style='font-size: 20px; text-decoration: underline;'>" . $prixTotal . " €</span>";
+    echo "<center><p> Total du panier : <span style='font-size: 20px; text-decoration: underline;'>" . $prixTotal . " €</span>
+        <input type='hidden' name='prixTotal' value='" . $prixTotal . "'>";
 
     //Bouton valider et payer panier
-    echo '<br><button type="button" onclick="Commande.php">Valider</button></center>';
+    echo '<br><button type="submit">Valider</button></form></center>';
 
 } else {
     echo "<center><h3>Votre panier est vide</h3></center>";
@@ -83,17 +84,19 @@ foreach ($resultGCo as $resGCo) {
     }
     //Afficher les commandes Passee
     $resultGCP = getCommandePassee($resGCo);
+
     $texte = "<div style='padding-left: 200px;
         padding-right: 200px;
-        font-size:18px;
-        text-align: center'>
-    <p><h3><u>Commande numéro " . $resultGCo[0]["co_id"] . ": </h3>Commandée le:</u> " . $resultGCo[0]["co_date"] . "<br><u>Articles commandés:</u> <ul>";
+        font-size:18px;'>
+    <p><h3><u>Commande numéro " . $resGCo["co_id"] . ": </h3>Commandée le:</u> " . $resGCo["co_date"] . "<br><u>Articles commandés:</u> <ul>";
     foreach ($resultGCP as $resGCP) {
         $texte .= "<li>" . $resGCP["pr_nom"] . " (X" . $resGCP["pr_quantite"] . ") prix unitaire: " . $resGCP["pr_coutHT"] . " €</li>";
     }
-    $texte .= "</ul><u>Expédié depuis:</u> " . $resultGCP[0]["ls_libelle"] . ".<br> <u>Adresse de livraison:</u> " . $resultGCP[0]["cl_adresse"];
-    $prixTotal = $resultGCP[0]["co_prixTotal"] * 1.20 + 5;
-    $texte .= "<br><u><b>Prix HT:</b></u> " . $resultGCP[0]["co_prixTotal"] . "€ <br><span style='font-size:15px; font-style:italic'>&emsp;+ 20 % TVA <br>&emsp;+ 5€ frais de port</span><br> <u>Prix TTC:</u> " . number_format((float)$prixTotal, 2, '.', '') . "€ </p>";
+    $texte .= "</ul>
+    ". //<u>Expédié depuis:</u> " . $resultGCP["ls_libelle"] . ".<br> //
+    "<u>Adresse de livraison:</u> " . $resGCo["cl_adresse"];
+    $prixTotal = $resGCo["co_prixTotal"] * 1.20 + 5;
+    $texte .= "<br><u>Prix HT:</u> " . $resGCo["co_prixTotal"] . "€ <br><span style='font-size:15px; font-style:italic'>&emsp;+ 20 % TVA <br>&emsp;+ 5€ frais de port</span><br> <u>Prix TTC:</u> <b>" . number_format((float)$prixTotal, 2, '.', '') . "€ </b></p>";
     echo $texte . "</div>";
 }
 
