@@ -11,7 +11,11 @@ if (!isset($_SESSION["panier"])) {
     $_SESSION["panier"] = [];
 }
 
-$_SESSION["panier"] += [$idProduit => $quantite];
+if (isset($_SESSION["panier"][$idProduit])) {
+    $_SESSION["panier"][$idProduit] +=  $quantite;
+} else {
+    $_SESSION["panier"] += [$idProduit => $quantite];
+}
 
 header('Location: MonPanier.php');
 exit();

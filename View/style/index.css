@@ -36,6 +36,18 @@ button {
     padding-bottom: 15px;
 }
 
+#input {
+    color: aliceblue;
+    background-color: #B19D7F;
+    margin-bottom: 15px;
+    height: 40px;
+    font-size: 15px;
+    width:100px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
 .produits {
     display: flex;
     flex-direction: row;
@@ -101,6 +113,7 @@ a.boutton {
     background-color: #B19D7F;
     border-color: aliceblue;
     color: aliceblue;
+    text-decoration: none;
 }
 
 .big-container {

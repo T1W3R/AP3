@@ -7,11 +7,17 @@ include("../Model/commandes.php");
 
 
 //Avoir le prix total de chaque(s) article(s)
-function GetPrixTotal($infos, $quantite)
+function GetPrixTotal($prix, $quantite)
 {
-    $prixTTC = ($infos["pr_coutHT"] * 1.20)*$quantite;
+    $prixTTC = $prix * intval($quantite);
     $prixTTC = number_format((float)$prixTTC, 2, '.', '');
     return $prixTTC;
+}
+
+function getPrixTTC($infos){
+    $prix = $infos["pr_coutHT"]*1.20;
+    $prix = number_format((float)$prix, 2, '.', '');
+    return $prix;
 }
 
 // Avoir toutes les commandes passées.

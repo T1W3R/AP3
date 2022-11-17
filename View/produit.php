@@ -25,7 +25,7 @@ if (isset($_SESSION["login"])) {
         </div>
 
         <?php
-        echo "<div> <img src='" . $image_initial . "' id='grande_image' style='border: 1px solid white; margin-left: 100px; margin-right: 100px; border-radius: 15px' height='700px' witdh='700px'> </div>";
+        echo "<div> <img src='" . $image_initial . "' id='grande_image' style='border: 1px solid white; margin-left: 100px; margin-right: 100px; border-radius: 15px' height='700px' width='700px'> </div>";
         ?>
         <script type='text/javascript'>
             function changerImage(id) {
@@ -53,8 +53,8 @@ if (isset($_SESSION["login"])) {
             <p>
                 Stock internet: " . $result["pr_stockInternet"] . " disponibilités.
             </p>"; ?>
-            <form method='POST' action='../Controller/Panier.php'>
-                <input name="quantite" value="1" type="number" min="1" style="color: aliceblue; background-color: #B19D7F; margin-bottom: 15px; height: 40px; font-size: 15px; width:100px; border-radius: 5px; border: none; text-align: center;">
+            <form method='POST' action='../Controller/traitementPanier.php'>
+                <input id="input" name="quantite" value="1" type="number" min="1" style='color: aliceblue; background-color: #B19D7F; margin-bottom: 15px; height: 40px; font-size: 15px; width:100px; border-radius: 5px; border: none; text-align: center;'>
                     <br>
                 <button type="submit" class="bouttonAjoutPanier">
                     <p> Ajouter au Panier </p>
