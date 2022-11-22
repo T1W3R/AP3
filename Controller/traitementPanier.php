@@ -6,9 +6,9 @@ include "../Model/commandes.php";
 $idProduit = $_POST['idProduit'];
 $quantite = $_POST['quantite'];
 $stockInternet = getStockInternet($idProduit);
+var_dump($stockInternet);
 
-
-if ($stockInternet > $quantite) {
+if ($stockInternet[0] > $quantite + $_SESSION["panier"][$idProduit]) {
     if (!isset($_SESSION["panier"])) {
         $_SESSION["panier"] = [];
     }
@@ -18,7 +18,7 @@ if ($stockInternet > $quantite) {
     } else {
         $_SESSION["panier"] += [$idProduit => $quantite];
     }
-
-    header('Location: MonPanier.php');
-    exit();
 }
+
+header('Location: MonPanier.php');
+exit();
