@@ -1,19 +1,24 @@
 <?php
 
 session_start();
-include("../Model/commandes.php");
+include("../Model/VenteMagasin.php");
 
-$prixTotal = $_POST['prixTotal'];
+if ($_POST["client"] != "") {
+  $idClient = $_POST["client"];
+} else {
+  $idClient = getIdClientMagasin($_SESSION["login"])[0];
+}
 
 //creer une commande
 $prixTotal = 0;
-foreach ($_SESSION as $key => $value) {
-  $prixTotal += getPrixProduit($key);
+foreach ($_SESSION["panier"] as $key => $value) {
+  $prixTotal += getPrixProduit($key) * $value * 1.20 ;
 }
+$prixTotal = round($prixTotal, 2);
 InsertCommande($prixTotal, $idClient);
 
 //creer recuperer l'id de la commande
-$idCommande = getIdCommande($idClient);
+$idCommande = getIdCommandeMagasin($idClient);
 
 //inserer dans les lie a
 foreach ($_SESSION["panier"] as $ref => $quantite) {
@@ -22,7 +27,7 @@ foreach ($_SESSION["panier"] as $ref => $quantite) {
 
 unset($_SESSION['panier']);
 
-header('Location: http://localhost/SLAM/AP3/AP3/Controller/monPanier.php');
+header('Location: http://localhost/SLAM/AP3/AP3/Controller/VenteMagasin.php');
 exit();
 
 
