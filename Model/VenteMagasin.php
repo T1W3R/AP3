@@ -66,6 +66,16 @@ function getArticleById($id){
   return $result["pr_nom"];
 }
 
+function getPrixProduit($ref){
+  $sql = 'SELECT pr_coutHT FROM `produit` WHERE pr_reference = "'. $ref .'";';
+  $bdd = construct_();
+  $query = $bdd->prepare($sql);
+  $query->execute();
+  $result = $query->fetch();
+
+  return $result["pr_coutHT"];
+}
+
 
 
 
