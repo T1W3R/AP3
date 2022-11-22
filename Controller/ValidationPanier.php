@@ -14,6 +14,7 @@ $idCommande = getIdCommande($idClient);
 //inserer dans les lie a
 foreach ($_SESSION["panier"] as $ref => $quantite) {
     InsertProduitsCommande($idCommande, $ref, $quantite);
+    subNbProduit($ref,$quantite);
 }
 
 unset($_SESSION['panier']);

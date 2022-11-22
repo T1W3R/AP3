@@ -13,6 +13,5 @@
       text-align: center;
       height: 35px;
       width: auto;
-
     }
   </style>

@@ -232,6 +232,20 @@ function InsertProduitsCommande($idCommande, $ref, $quantite)
     ));
 }
 
+function subNbProduit($ref,$quantite){
+  $getQuantite = "SELECT `pr_stockInternet` FROM `produit` WHERE pr_reference = '".$ref."'";
+  $bdd = construct_();
+  $queryIC = $bdd->prepare($getQuantite);
+  $queryIC->execute();
+  $resultIC = $queryIC->fetch();
+
+  $qTotale = $resultIC[0] - $quantite;
+  $sql="UPDATE `produit` SET pr_stockInternet = ".$qTotale." WHERE pr_reference = '".$ref."'";
+  $bdd = construct_();
+  $query = $bdd->prepare($sql);
+  $query->execute();
+}
+
 
 function getStockInternet($id)
 {
