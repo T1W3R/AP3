@@ -7,7 +7,8 @@ $idProduit = $_POST['idProduit'];
 $quantite = $_POST['quantite'];
 $stockInternet = getStockInternet($idProduit);
 
-if($quantite<$stockInternet){
+
+if ($stockInternet > $quantite) {
     if (!isset($_SESSION["panier"])) {
         $_SESSION["panier"] = [];
     }
@@ -17,7 +18,7 @@ if($quantite<$stockInternet){
     } else {
         $_SESSION["panier"] += [$idProduit => $quantite];
     }
-}
 
-header('Location: MonPanier.php');
-exit();
+    header('Location: MonPanier.php');
+    exit();
+}

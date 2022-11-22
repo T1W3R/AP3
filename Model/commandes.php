@@ -196,7 +196,8 @@ function getRayons()
     return $result;
 }
 
-function InsertCommande($prixTotal, $idClient){
+function InsertCommande($prixTotal, $idClient)
+{
     $insert = "INSERT INTO `commande` (`co_date`, `co_prixTotal`, `co_statut`, `fk_cl`) VALUES (current_timestamp(), :prixTotal, 'transmise', :idClient);";
 
     $bdd = construct_();
@@ -209,7 +210,7 @@ function InsertCommande($prixTotal, $idClient){
 
 function getIdCommande($idClient)
 {
-    $getIdCommande = "SELECT co_id FROM `commande` WHERE fk_cl = ". $idClient[0] ." ORDER BY co_id DESC LIMIT 1;";
+    $getIdCommande = "SELECT co_id FROM `commande` WHERE fk_cl = " . $idClient[0] . " ORDER BY co_id DESC LIMIT 1;";
     $bdd = construct_();
     $queryIC = $bdd->prepare($getIdCommande);
     $queryIC->execute();
@@ -229,4 +230,15 @@ function InsertProduitsCommande($idCommande, $ref, $quantite)
         ":ref" => $ref,
         ":quantite" => $quantite
     ));
+}
+
+
+function getStockInternet($id)
+{
+    $getIdCommande = "SELECT pr_stockInternet FROM `produit` WHERE pr_reference = " . $id . ";";
+    $bdd = construct_();
+    $queryIC = $bdd->prepare($getIdCommande);
+    $queryIC->execute();
+    $resultIC = $queryIC->fetch();
+    return $resultIC;
 }

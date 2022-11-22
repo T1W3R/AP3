@@ -3,12 +3,10 @@
 include "../Model/commandes.php";
 
 $result = getInfoArticle();
-
+$idProduit = $_GET['id'];
 $resultGP = getPhotosProduit($result);
-
-$DispoMagasin = getStockMagasin($_GET['id']);
-
-
+$DispoMagasin = getStockMagasin($idProduit);
+$stockInternet = getStockInternet($idProduit);
 
 if (isset($_GET["id"])) {
     //Calcul prix total

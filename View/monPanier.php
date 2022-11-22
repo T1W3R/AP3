@@ -42,18 +42,18 @@ if (isset($_SESSION["panier"])) {
                         <p style='margin-left: 15px; font-size: 20px; text-decoration: underline;'>" . $infos["pr_nom"] . "</p>
                     </a>
                     <div>
-                        <input type='text' readonly='true' value='" . $value . "' min='0' style='color: aliceblue; background-color: #B19D7F; margin-left: 15px; margin-right: 5px; height: 20px; width: 76px; font-size: 15px; border-radius: 5px 5px 0px 0px; border: none; text-align: center;'> 
+                        <input type='text' value='" . $value . "' min='0' style='color: aliceblue; background-color: #B19D7F; margin-left: 15px; margin-right: 5px; height: 20px; width: 76px; font-size: 15px; border-radius: 5px 5px 0px 0px; border: none; text-align: center;'> 
                         <div style='display: flex; margin-left: 15px;'>
-                            <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 0px 5px; height: 20px; width: 40px' href='MoinSession.php?id=" . $infos["pr_reference"] . "'>-</a>
-                            <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 5px 0px; height: 20px; width: 40px' href='PlusSession.php?id=" . $infos["pr_reference"] . "'>+</a>
+                            <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 0px 5px; height: 20px; width: 40px' href='MoinSession.php?id=" . $infos["pr_reference"] . "'><center>-</center></a>
+                            <a style='background-color: aliceblue; color: #c1B89F; border-radius: 0px 0px 5px 0px; height: 20px; width: 40px' href='PlusSession.php?id=" . $infos["pr_reference"] . "'><center>+</center></a>
                         </div>
                     </div>
                     <p> x " . $infos["pr_coutHT"] . " €</p>
-                    <p style='margin-left: 30px; font-size: 30px;'>" . $infos["pr_coutHT"] . " €</p>
+                    <p style='margin-left: 30px; font-size: 30px;'>" . $prixTTC . " €</p>
                 </div>
                <br>";
 
-        $prixTotal += $infos["pr_coutHT"];
+        $prixTotal += $prixTTC;
     }
 
     echo "  <span style='font-size:15px; font-style:italic; margin-left: 110px'>&emsp;+ 20 % TVA </span>

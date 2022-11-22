@@ -52,17 +52,17 @@ if (isset($_SESSION["login"])) {
             </p>
             <p>
                 Stock internet: " . $result["pr_stockInternet"] . " disponibilités.
-            </p>"; ?>
+            </p>
             <form method='POST' action='../Controller/traitementPanier.php'>
-                <input id="input" name="quantite" value="1" type="number" min="1" style='color: aliceblue; background-color: #B19D7F; margin-bottom: 15px; height: 40px; font-size: 15px; width:100px; border-radius: 5px; border: none; text-align: center;'>
+                <input id='input' name='quantite' value='1' type='number' min='1' max='" . $stockInternet[0] . "' style='color: aliceblue; background-color: #B19D7F; margin-bottom: 15px; height: 40px; font-size: 15px; width:100px; border-radius: 5px; border: none; text-align: center;'>
                     <br>
-                <button type="submit" class="bouttonAjoutPanier">
+                <button type='submit' class='bouttonAjoutPanier'>
                     <p> Ajouter au Panier </p>
                 </button>
-                <?php echo'<input type="hidden" value="'. $_GET["id"] .'" name="idProduit">';?>
-                
-                    
-            </form>
+                <input type='hidden' value='" . $_GET["id"] . "' name='idProduit'>"; ?>
+
+
+        </form>
     </div>
 </div>
 
