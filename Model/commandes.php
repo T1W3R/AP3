@@ -126,9 +126,9 @@ function getAllCommandes($infosCl)
 function getCommandePassee($resGCo)
 {
     $getCoPassee = "SELECT pr_nom, pr_quantite, pr_coutHT, co_prixTotal, ls_libelle, cl_adresse
-    FROM `commande` 
-        JOIN lie_a ON fk_co = co_id 
-        JOIN produit ON lie_a.fk_pr = pr_reference 
+    FROM `commande`
+        JOIN lie_a ON fk_co = co_id
+        JOIN produit ON lie_a.fk_pr = pr_reference
         JOIN est_stocke ON est_stocke.fk_pr = pr_reference
         JOIN lieustockage ON ls_id = fk_ls
         JOIN client ON fk_cl = cl_id
