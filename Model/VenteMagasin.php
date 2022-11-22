@@ -1,5 +1,6 @@
 <?php
-include("bdd.php");
+include("../Model/commandes.php");
+
 function logMagasin($login, $mdp){
   $sql = "SELECT ma_login, ma_id FROM `magasin` WHERE ma_login = '".$login."' AND ma_mdp = '".$mdp."';";
   $bdd = construct_();
@@ -74,6 +75,25 @@ function getPrixProduit($ref){
   $result = $query->fetch();
 
   return $result["pr_coutHT"];
+}
+
+function getIdClientMagasin($login){
+  $sql = "SELECT ma_idClient FROM magasin WHERE ma_login = '". $login . "'";
+  $bdd = construct_();
+  $query = $bdd->prepare($sql);
+  $query->execute();
+  $result = $query->fetch();
+
+  return $result;
+}
+
+function getIdCommandeMagasin($idClient){
+  $getIdCommande = "SELECT co_id FROM `commande` WHERE fk_cl = ". $idClient ." ORDER BY co_id DESC LIMIT 1;";
+  $bdd = construct_();
+  $queryIC = $bdd->prepare($getIdCommande);
+  $queryIC->execute();
+  $resultIC = $queryIC->fetch();
+  return $resultIC;
 }
 
 

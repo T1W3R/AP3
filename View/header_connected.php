@@ -14,7 +14,7 @@
     <header>
         <div class="magasin">
             <img src="../images/store.png" alt="store.png" height=13px>
-            <a href="index.php" id="liens">Nos Magasins</a>
+            <a href="nosMagasins.php" id="liens">Nos Magasins</a>
         </div>
         <div class="logo"><a href="index.php"><img src="../images/logo.png" alt="logo.png" height=20px style="padding-left: 180px;"></a></div>
         <div class="magasin">
