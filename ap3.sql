@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le : mar. 15 nov. 2022 à 13:29
+-- Généré le : mar. 29 nov. 2022 à 13:41
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 7.4.24
 
@@ -65,7 +65,8 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`cl_id`, `cl_code`, `cl_nom`, `cl_prenom`, `cl_mdp`, `cl_adresse`, `cl_email`, `cl_telephone`, `cl_dateNaissance`) VALUES
 (1, 'CL00000001', 'o²o', 'oooo', '72905e7b32d847468edcdbf99f7d218e466cd828300306f1d9f8c3e0512e44fe4394644b581ed52656a2870c9a67c592bc40ca322099aa52bf528c54f9cabde0', '25 rue zzzzz', 'ooooooo@gmail.com', '0658985412', '0000-00-00'),
-(2, 'CL00000002', 'tiwer', 'kjzef', '40d306df4fbffce56c38ce96948d6bac43f8f0eb91a7918e0bb6ebb31e1f6d9fdf9de33c31f9bc0d79cf9453040b78ab6d24f4893cef2b4187ffb504635ea906', '24 rue du beguinage Assevent', '55555@gmail.com', '0783454837', '2003-01-28');
+(2, 'CL00000002', 'tiwer', 'kjzef', '40d306df4fbffce56c38ce96948d6bac43f8f0eb91a7918e0bb6ebb31e1f6d9fdf9de33c31f9bc0d79cf9453040b78ab6d24f4893cef2b4187ffb504635ea906', '24 rue du beguinage Assevent', '55555@gmail.com', '0783454837', '2003-01-28'),
+(3, 'CL00000003', 'A4Sparis', 'Lucas', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', '623 rue du boulevard Paris', 'A4Sparis@gmail.com', '0612345678', '2003-01-28');
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,18 @@ CREATE TABLE `commande` (
 
 INSERT INTO `commande` (`co_id`, `co_date`, `co_prixTotal`, `co_statut`, `fk_cl`) VALUES
 (2, '2022-09-27', 80.59, 'transmise', 1),
-(3, '2022-09-27', 35.99, 'transmise', 1);
+(3, '2022-09-27', 35.99, 'transmise', 1),
+(4, '2022-11-22', 440.48, 'transmise', 2),
+(5, '2022-11-22', 4943.74, 'transmise', 3),
+(6, '2022-11-22', 8351.5, 'transmise', 1),
+(7, '2022-11-22', 0, 'transmise', 1),
+(10, '2022-11-22', 1752.1, 'transmise', 3),
+(11, '2022-11-22', 1752.1, 'transmise', 3),
+(12, '2022-11-22', 1752.1, 'transmise', 3),
+(13, '2022-11-22', 1752.1, 'transmise', 3),
+(14, '2022-11-22', 1752.1, 'transmise', 3),
+(15, '2022-11-22', 220.24, 'transmise', 2),
+(17, '2022-11-29', 181.34, 'transmise', 2);
 
 -- --------------------------------------------------------
 
@@ -118,7 +130,9 @@ CREATE TABLE `est_stocke` (
 
 INSERT INTO `est_stocke` (`fk_pr`, `fk_ls`) VALUES
 ('000000000001', 1),
-('000000000002', 2);
+('000000000002', 2),
+('000000000003', 1),
+('000000000004', 1);
 
 -- --------------------------------------------------------
 
@@ -175,8 +189,23 @@ CREATE TABLE `lie_a` (
 --
 
 INSERT INTO `lie_a` (`pr_quantite`, `fk_pr`, `fk_co`) VALUES
+(45, '000000000001', 5),
+(85, '000000000001', 6),
+(14, '000000000001', 12),
+(14, '000000000001', 13),
+(14, '000000000001', 14),
 (3, '000000000002', 2),
-(1, '000000000002', 3);
+(1, '000000000002', 3),
+(2, '000000000002', 4),
+(47, '000000000002', 5),
+(78, '000000000002', 6),
+(17, '000000000002', 12),
+(17, '000000000002', 13),
+(17, '000000000002', 14),
+(1, '000000000002', 15),
+(2, '000000000002', 17),
+(6, '000000000003', 4),
+(3, '000000000003', 15);
 
 -- --------------------------------------------------------
 
@@ -188,16 +217,17 @@ CREATE TABLE `magasin` (
   `ma_id` int(11) NOT NULL,
   `ma_lieu` varchar(45) NOT NULL,
   `ma_login` varchar(45) NOT NULL,
-  `ma_mdp` varchar(125) NOT NULL
+  `ma_mdp` varchar(125) NOT NULL,
+  `ma_idClient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `magasin`
 --
 
-INSERT INTO `magasin` (`ma_id`, `ma_lieu`, `ma_login`, `ma_mdp`) VALUES
-(1, 'Paris', 'A4Fparis', '123456'),
-(2, 'Tours', 'A4Ftours', '123456');
+INSERT INTO `magasin` (`ma_id`, `ma_lieu`, `ma_login`, `ma_mdp`, `ma_idClient`) VALUES
+(1, 'Paris', 'A4Fparis', '123456', 3),
+(2, 'Tours', 'A4Ftours', '123456', 0);
 
 -- --------------------------------------------------------
 
@@ -260,9 +290,9 @@ CREATE TABLE `produit` (
 
 INSERT INTO `produit` (`pr_nom`, `pr_reference`, `pr_coutHT`, `pr_description`, `pr_stockInternet`, `fk_fournisseur`, `fk_rayon`) VALUES
 ('Chaussures nike', '000000000001', 12.54, 'Chaussures nike sport', 1, 'NIK', 'FOO'),
-('Jogging NIKE', '000000000002', 75.56, 'Jogging nike sport', 12, 'NIK', 'FOO'),
-('SONGMICS haltères', '000000000003', 35.99, 'SCULPTEZ VOTRE CORPS : Les équipements de sports SONGMICS vous aident à faire du sport au travail ou à la maison. Remuez-vous et commencez dès maintenant !', 16, 'NIK', 'MUS'),
-('PLANCHE NATATION PISCINE BLEU ROSE', '000000000004', 7.51, 'Besoin de support lors de vos exercices ? Cette planche de natation en mousse offre une grande flottabilité pour les nageurs désirant avoir un support lors du travail des jambes ou de l\'apprentissage.', 60, 'NIK', 'NAT');
+('Jogging NIKE', '000000000002', 75.56, 'Jogging nike sport', 9, 'NIK', 'FOO'),
+('SONGMICS haltères', '000000000003', 35.99, 'SCULPTEZ VOTRE CORPS : Les équipements de sports SONGMICS vous aident à faire du sport au travail ou à la maison. Remuez-vous et commencez dès maintenant !', 13, 'NIK', 'MUS'),
+('PLANCHE NATATION PISCINE BLEU ROSE', '000000000004', 7.51, 'Besoin de support lors de vos exercices ? Cette planche de natation en mousse offre une grande flottabilité pour les nageurs désirant avoir un support lors du travail des jambes ou de l\'apprentissage.', 56, 'NIK', 'NAT');
 
 -- --------------------------------------------------------
 
@@ -388,13 +418,13 @@ ALTER TABLE `rayon`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `cl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `enfant`
