@@ -37,7 +37,7 @@ foreach ($articles as $article) {
   <img width='400px' src='". $image["ph_chemin"] ."'>
   <br>".$article["pr_nom"]."<br>
   <label for='quantite'>Quantitée: </label><br>
-  <input id='quantite' type='number' min='1' name='quantite'>
+  <input id='quantite' type='number' min='1' name='quantite' value=1>
   <input type='hidden' name='id' value='".$article["pr_reference"]."'>
   <br><br>
   <button type='submit'>Ajouter au panier</button>

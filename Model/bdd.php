@@ -10,5 +10,5 @@ function construct_()
     } catch (PDOException $e) {
         die('DB Error: ' . $e->getMessage());
     }
-    
+
 }
