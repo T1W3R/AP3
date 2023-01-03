@@ -8,7 +8,7 @@ $quantite = $_POST['quantite'];
 $stockInternet = getStockInternet($idProduit);
 var_dump($stockInternet);
 
-if ($stockInternet[0] > $quantite + $_SESSION["panier"][$idProduit]) {
+if ($stockInternet[0] >= $quantite + $_SESSION["panier"][$idProduit]) {
     if (!isset($_SESSION["panier"])) {
         $_SESSION["panier"] = [];
     }
